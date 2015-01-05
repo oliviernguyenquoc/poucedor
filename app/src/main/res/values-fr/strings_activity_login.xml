@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email d'une personne du binome</string>
+    <string name="prompt_email">Email d\'une personne du binôme</string>
     <string name="prompt_password">Mot de passe du binôme</string>
     <string name="action_sign_in">Se connecter</string>
     <string name="action_sign_in_short">Se connecter</string>
