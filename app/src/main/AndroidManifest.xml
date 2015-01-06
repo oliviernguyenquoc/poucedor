@@ -26,17 +26,24 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
-            android:name=".NavDrawerActivity"
-            android:label="@string/title_activity_nav_drawer" >
-        </activity>
-        <activity
             android:name=".MapActivity"
             android:label="@string/title_activity_map" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RankingActivity"
+            android:label="@string/title_activity_ranking" >
+        </activity>
+
+        <service
+            android:name=".ServiceBackground"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>
