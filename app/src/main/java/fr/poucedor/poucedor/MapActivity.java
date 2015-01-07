@@ -13,10 +13,6 @@ import android.location.LocationManager;
 
 import android.os.Bundle;
 import android.graphics.drawable.Drawable;
-import android.support.v4.widget.DrawerLayout;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class MapActivity extends BaseActivity {
 
