@@ -15,29 +15,28 @@
   -->
 
 <resources>
-    <color name="colorPrimary">@color/material_blue_grey_800</color>
-    <color name="colorPrimaryDark">@color/material_blue_grey_900</color>
+    //TODO Replace Image background by color
+    <color name="colorPrimary">#1E88E5</color> // #FF8F00
+    <color name="colorPrimaryDark">#0D47A1</color> //#FF6F00
 
-    <color name="colorSecondary">@color/material_deep_teal_200</color>
-    <color name="colorSecondaryDark">@color/material_deep_teal_500</color>
+    <color name="colorSecondary">#FF8F00</color>
+    <color name="colorSecondaryDark">#FF6F00</color>
 
     <color name="windowBackgroundColor">#333333</color>
     <color name="black_translucent">#80000000</color>
 
-    <color name="theme_primary">#3f51b5</color>
-    <color name="theme_primary_dark">#303f9f</color>
-    <color name="theme_primary_light">#7986cb</color>
-
     <color name="navdrawer_background">#ffffffff</color>
 
     <color name="navdrawer_text_color">@color/body_text_1</color>
-    <color name="navdrawer_text_color_selected">@color/theme_primary</color>
+    <color name="navdrawer_text_color_selected">@color/colorPrimary</color>
     <color name="navdrawer_icon_tint">#888</color>
-    <color name="navdrawer_icon_tint_selected">@color/theme_primary</color>
+    <color name="navdrawer_icon_tint_selected">@color/colorPrimary</color>
 
     <color name="session_photo_scrim">#6000</color>
 
     <color name="transparent">#00000000</color>
+
+    <color name="translucent_statusbar_background">#cc3f51b5</color>
 
     <color name="body_text_1">#de000000</color>
     <color name="body_text_2">#8a000000</color>

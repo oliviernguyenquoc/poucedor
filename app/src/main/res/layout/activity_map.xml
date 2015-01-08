@@ -11,9 +11,12 @@
         android:layout_height="match_parent"
         android:background="#fff">
 
-        <include
+        <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            layout="@layout/toolbar" />
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:minHeight="?attr/actionBarSize"
+            android:background="?attr/colorPrimary" />
 
         <org.osmdroid.views.MapView
             android:id="@+id/mapview"
