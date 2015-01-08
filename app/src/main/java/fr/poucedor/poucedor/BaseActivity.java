@@ -25,10 +25,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.net.Uri;
 
 public abstract class BaseActivity extends ActionBarActivity {
 
@@ -397,13 +397,15 @@ public abstract class BaseActivity extends ActionBarActivity {
                 startActivity(intent);
                 finish();
                 break;
-            //TODO Add class
-            /*
             case NAVDRAWER_ITEM_ALERT:
-                intent = new Intent(this, AlertActivity.class);
-                startActivity(intent);
+                String number = "112";
+                Uri call = Uri.parse("tel:" + number);
+                Intent surf = new Intent(Intent.ACTION_DIAL, call);
+                startActivity(surf);
                 finish();
                 break;
+            //TODO Add class
+            /*
             case NAVDRAWER_ITEM_LOG_OUT:
                 intent = new Intent(this, LogOutActivity.class);
                 startActivity(intent);
