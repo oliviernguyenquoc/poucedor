@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Adapted from Google I/O 2014 App - Apache License, Version 2.0
+
+    Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
+-->
+
 <resources>
     <style name="AppTheme" parent="AppTheme.Base"/>
 

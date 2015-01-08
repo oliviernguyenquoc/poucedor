@@ -1,6 +1,14 @@
+/*
+ * Adapted from OSMDroid Sample App - Apache License, Version 2.0
+ *
+ * Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
+ *
+ */
+
 package fr.poucedor.poucedor;
 
 import java.util.ArrayList;
+
 
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.api.IMapView;
@@ -21,7 +29,7 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
         // TODO Auto-generated constructor stub
     }
 
-    public void addItem(GeoPoint p, String title, String snippet){
+    public void addItem(GeoPoint p, String title, String snippet) {
         OverlayItem newItem = new OverlayItem(title, snippet, p);
         overlayItemList.add(newItem);
         populate();

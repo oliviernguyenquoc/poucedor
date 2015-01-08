@@ -18,20 +18,6 @@
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize" />
 
-        <org.osmdroid.views.MapView
-            android:id="@+id/mapview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
-            android:clickable="true"
-            android:clipToPadding="false"
-            android:columnWidth="@dimen/item_width"
-            android:horizontalSpacing="4dp"
-            android:numColumns="auto_fit"
-            android:padding="4dp"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="4dp" />
-
     </RelativeLayout>
 
     <!-- Nav drawer -->

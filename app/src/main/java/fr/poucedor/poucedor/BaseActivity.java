@@ -8,7 +8,6 @@
 package fr.poucedor.poucedor;
 
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 
 import android.os.Handler;
@@ -55,9 +54,8 @@ public abstract class BaseActivity extends ActionBarActivity {
     };
 
     // icons for navdrawer items (indices must correspond to above array)
-    private static final int[] NAVDRAWER_ICON_RES_ID = new int[] {
+    private static final int[] NAVDRAWER_ICON_RES_ID = new int[]{
             R.drawable.ic_drawer_map,  // Map
-            //TODO Add drawables
             R.drawable.ic_drawer_ranking,  // Ranking
             R.drawable.ic_drawer_settings,
             R.drawable.ic_drawer_alert,
@@ -65,8 +63,6 @@ public abstract class BaseActivity extends ActionBarActivity {
     };
 
     // Navigation drawer:
-
-    private ObjectAnimator mStatusBarColorAnimator;
     private LinearLayout mAccountListContainer;
     private ViewGroup mDrawerItemsListContainer;
     private Handler mHandler;
@@ -166,8 +162,6 @@ public abstract class BaseActivity extends ActionBarActivity {
         autoShowOrHideActionBar(shouldShow);
     }
     */
-
-
     private void setupNavDrawer() {
         // What nav drawer item should be selected?
         int selfItem = getSelfNavDrawerItem();
@@ -195,6 +189,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             });
         }
 
+        //Always bug on that. Solution :
         drawer.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
 
         // populate the nav drawer with the correct items
@@ -397,13 +392,13 @@ public abstract class BaseActivity extends ActionBarActivity {
                 startActivity(intent);
                 finish();
                 break;
-            //TODO Add class
-            /*
             case NAVDRAWER_ITEM_SETTINGS:
                 intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 finish();
                 break;
+            //TODO Add class
+            /*
             case NAVDRAWER_ITEM_ALERT:
                 intent = new Intent(this, AlertActivity.class);
                 startActivity(intent);
