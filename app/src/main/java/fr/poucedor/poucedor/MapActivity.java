@@ -22,9 +22,6 @@ public class MapActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //setContentView(R.layout.activity_map);
-        setActionBarIcon(R.drawable.ic_ab_drawer);
-
         MapView mapView = (MapView) findViewById(R.id.mapview);
 
         MapController mapController = new MapController(mapView);
@@ -56,6 +53,11 @@ public class MapActivity extends BaseActivity {
         GeoPoint myPoint2 = new GeoPoint((int)48.8534100*1000000, (int)2.3488000*1000000);
         myItemizedOverlay.addItem(myPoint2, "myPoint2", "myPoint2");
 
+    }
+
+    @Override
+    protected int getSelfNavDrawerItem() {
+        return NAVDRAWER_ITEM_MAP;
     }
 
     @Override protected int getLayoutResource() {
