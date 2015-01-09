@@ -199,6 +199,8 @@ public abstract class BaseActivity extends ActionBarActivity {
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    //To avoid double item selection, we update the list every click
+                    populateNavDrawer();
                     drawer.openDrawer(Gravity.START);
                 }
             });
