@@ -26,17 +26,12 @@ public final class DatabaseContract {
         public static final String COLUMN_NAME_STUDENT1_EMAIL = "student1Email";
         public static final String COLUMN_NAME_STUDENT2_EMAIL = "student2Email";
         public static final String COLUMN_NAME_UNIVERSITY_ID = "universityId";
+        public static final String COLUMN_NAME_FD = "farthestDistance";
+        public static final String COLUMN_NAME_FD_LATITUDE = "fdLatitude";
+        public static final String COLUMN_NAME_FD_LONGITUDE = "fdLongitude";
+        public static final String COLUMN_NAME_LAST_LATITUDE = "lastLatitude";
+        public static final String COLUMN_NAME_LAST_LONGITUDE = "lastLongitude";
         public static final String COLUMN_NAME_MY_TEAM = "myTeam";
-    }
-
-    // This table represents the positions of Teams received from the server
-    public static abstract class Position implements BaseColumns {
-        public static final String TABLE_NAME = "position";
-        public static final String COLUMN_NAME_TEAM_ID = "teamId";
-        public static final String COLUMN_NAME_DATESTAMP = "datestamp";
-        public static final String COLUMN_NAME_LATITUDE = "latitude";
-        public static final String COLUMN_NAME_LONGITUDE = "longitude";
-        public static final String COLUMN_NAME_DISTANCE = "distance";
     }
 
     // This table represents the positions of the device, with the synced value representing
@@ -54,32 +49,27 @@ public final class DatabaseContract {
 
     public static final String SQL_CREATE_UNIVERSITY_TABLE =
             "CREATE TABLE " + University.TABLE_NAME + " (" +
-                    University._ID + " INTEGER PRIMARY KEY," +
+                    University._ID + TEXT_TYPE + " PRIMARY KEY," +
                     University.COLUMN_NAME_NAME      + TEXT_TYPE + COMMA_SEP +
                     University.COLUMN_NAME_LATITUDE  + " double" + COMMA_SEP +
                     University.COLUMN_NAME_LONGITUDE + " double" + " );";
 
     public static final String SQL_CREATE_TEAM_TABLE =
             "CREATE TABLE " + Team.TABLE_NAME + " (" +
-                    Team._ID + " INTEGER PRIMARY KEY," +
+                    Team._ID + TEXT_TYPE + " PRIMARY KEY," +
                     Team.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
                     Team.COLUMN_NAME_STUDENT1_NAME  + TEXT_TYPE + COMMA_SEP +
                     Team.COLUMN_NAME_STUDENT1_EMAIL + TEXT_TYPE + COMMA_SEP +
                     Team.COLUMN_NAME_STUDENT2_NAME  + TEXT_TYPE + COMMA_SEP +
                     Team.COLUMN_NAME_STUDENT2_EMAIL + TEXT_TYPE + COMMA_SEP +
-                    Team.COLUMN_NAME_MY_TEAM       + " BOOLEAN" + COMMA_SEP +
+                    Team.COLUMN_NAME_MY_TEAM        + " BOOLEAN" + COMMA_SEP +
+                    Team.COLUMN_NAME_FD             + " double"  + COMMA_SEP +
+                    Team.COLUMN_NAME_FD_LATITUDE    + " double"  + COMMA_SEP +
+                    Team.COLUMN_NAME_FD_LONGITUDE   + " double"  + COMMA_SEP +
+                    Team.COLUMN_NAME_LAST_LATITUDE  + " double"  + COMMA_SEP +
+                    Team.COLUMN_NAME_LAST_LONGITUDE + " double"  + COMMA_SEP +
                     "FOREIGN KEY(" + Team.COLUMN_NAME_UNIVERSITY_ID + ") REFERENCES " +
                     University.TABLE_NAME + "(" + University._ID + "));";
-
-    public static final String SQL_CREATE_POSITION_TABLE =
-            "CREATE TABLE " + Position.TABLE_NAME + " (" +
-                    Position._ID + " INTEGER PRIMARY KEY," +
-                    Position.COLUMN_NAME_DATESTAMP + " INTEGER" + COMMA_SEP +
-                    Position.COLUMN_NAME_DISTANCE  + " double"  + COMMA_SEP +
-                    Position.COLUMN_NAME_LATITUDE  + " double"  + COMMA_SEP +
-                    Position.COLUMN_NAME_LONGITUDE + " double"  + COMMA_SEP +
-                    "FOREIGN KEY(" + Position.COLUMN_NAME_TEAM_ID + ") REFERENCES " +
-                    Team.TABLE_NAME + "(" + Team._ID + "));";
 
     public static final String SQL_CREATE_MYPOSITION_TABLE =
             "CREATE TABLE " + MyPosition.TABLE_NAME + " (" +
