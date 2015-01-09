@@ -1,3 +1,10 @@
+/*
+ * Adapted from OSMDroid Sample App - Apache License, Version 2.0
+ *
+ * Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
+ *
+ */
+
 package fr.poucedor.poucedor;
 
 import org.osmdroid.DefaultResourceProxyImpl;
@@ -38,7 +45,7 @@ public class MapActivity extends BaseActivity {
         mapView.setBuiltInZoomControls(true);
         mapView.setMultiTouchControls(true);
 
-        Drawable marker=getResources().getDrawable(android.R.drawable.star_big_on);
+        Drawable marker = getResources().getDrawable(android.R.drawable.star_big_on);
         int markerWidth = marker.getIntrinsicWidth();
         int markerHeight = marker.getIntrinsicHeight();
         marker.setBounds(0, markerHeight, markerWidth, 0);
@@ -48,9 +55,9 @@ public class MapActivity extends BaseActivity {
         myItemizedOverlay = new MyItemizedOverlay(marker, resourceProxy);
         mapView.getOverlays().add(myItemizedOverlay);
 
-        GeoPoint myPoint1 = new GeoPoint(0*1000000, 0*1000000);
+        GeoPoint myPoint1 = new GeoPoint(0 * 1000000, 0 * 1000000);
         myItemizedOverlay.addItem(myPoint1, "myPoint1", "myPoint1");
-        GeoPoint myPoint2 = new GeoPoint((int)48.8534100*1000000, (int)2.3488000*1000000);
+        GeoPoint myPoint2 = new GeoPoint((int) 48.8534100 * 1000000, (int) 2.3488000 * 1000000);
         myItemizedOverlay.addItem(myPoint2, "myPoint2", "myPoint2");
 
     }
@@ -60,7 +67,8 @@ public class MapActivity extends BaseActivity {
         return NAVDRAWER_ITEM_MAP;
     }
 
-    @Override protected int getLayoutResource() {
+    @Override
+    protected int getLayoutResource() {
         return R.layout.activity_map;
     }
 

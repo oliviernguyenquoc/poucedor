@@ -1,3 +1,40 @@
+<!--
+    Adapted from Google I/O 2014 App - Apache License, Version 2.0
+
+    Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
+-->
+
 <resources>
     <string name="app_name">Pouce d\'Or</string>
+
+    <!-- Name of Activities -->
+    <string name="title_activity_map">Carte</string>
+    <string name="title_activity_ranking">Classement</string>
+    <string name="title_activity_settings">Réglages</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email d\'une personne du binôme</string>
+    <string name="prompt_password">Mot de passe du binôme</string>
+    <string name="action_sign_in">Se connecter</string>
+    <string name="action_sign_in_short">Se connecter</string>
+
+    <string name="error_invalid_email">Cet email est invalide</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+
+
+    <!-- NavDrawer Names -->
+
+    <!-- Menu item to open the Map screen [CHAR_LIMIT=20] -->
+    <string name="navdrawer_item_map">Carte</string>
+    <!-- Menu item to open the Ranking screen [CHAR_LIMIT=20] -->
+    <string name="navdrawer_item_ranking">Classement</string>
+    <!-- Menu item to open the Alert screen [CHAR_LIMIT=20] -->
+    <string name="navdrawer_item_alert">Alerte</string>
+    <!-- Menu item to open the Settings screen [CHAR_LIMIT=20] -->
+    <string name="navdrawer_item_settings">Réglages</string>
+    <!-- Menu item to open the Log Out screen [CHAR_LIMIT=20] -->
+    <string name="navdrawer_item_log_out">Déconnexion</string>
+
 </resources>

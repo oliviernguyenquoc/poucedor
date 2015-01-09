@@ -1,29 +1,25 @@
 /*
- * Copyright (C) 2014 Antonio Leiva Gordillo.
+ * Adapted from Google I/O 2014 App - Apache License, Version 2.0
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
  */
 
 package fr.poucedor.poucedor;
 
-import android.animation.ObjectAnimator;
+
 import android.content.Intent;
+
 import android.os.Handler;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.os.Build;
 import android.os.Bundle;
+
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+
+import java.util.ArrayList;
+
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,10 +28,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-
-import android.os.Build;
+import android.net.Uri;
 
 public abstract class BaseActivity extends ActionBarActivity {
 
@@ -61,25 +54,18 @@ public abstract class BaseActivity extends ActionBarActivity {
     };
 
     // icons for navdrawer items (indices must correspond to above array)
-    private static final int[] NAVDRAWER_ICON_RES_ID = new int[] {
+    private static final int[] NAVDRAWER_ICON_RES_ID = new int[]{
             R.drawable.ic_drawer_map,  // Map
-            //TODO Add drawables
-            //R.drawable.ic_drawer_ranking,  // Ranking
-            0, // Sign in
+            R.drawable.ic_drawer_ranking,  // Ranking
             R.drawable.ic_drawer_settings,
-            //R.drawable.ic_drawer_alert,
-            //R.drawable.ic_drawer_log_out,
+            R.drawable.ic_drawer_alert,
+            R.drawable.ic_drawer_log_out,
     };
 
     // Navigation drawer:
-
-    private ObjectAnimator mStatusBarColorAnimator;
     private LinearLayout mAccountListContainer;
     private ViewGroup mDrawerItemsListContainer;
     private Handler mHandler;
-
-    private int mThemedStatusBarColor;
-    private int mNormalStatusBarColor;
 
     private Toolbar toolbar;
     private DrawerLayout drawer;
@@ -108,17 +94,13 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         getActionBarToolbar();
 
-        mThemedStatusBarColor = getResources().getColor(R.color.theme_primary_dark);
-        mNormalStatusBarColor = mThemedStatusBarColor;
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         setupNavDrawer();
-        System.out.println("setupNavDrawer()");
         setupAccountBox();
-        System.out.println("setupAccountBox()");
 
         //Normalement, il y a tout dans cette partie mais pas sûr
 
@@ -180,8 +162,6 @@ public abstract class BaseActivity extends ActionBarActivity {
         autoShowOrHideActionBar(shouldShow);
     }
     */
-
-
     private void setupNavDrawer() {
         // What nav drawer item should be selected?
         int selfItem = getSelfNavDrawerItem();
@@ -209,6 +189,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             });
         }
 
+        //Always bug on that. Solution :
         drawer.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
 
         // populate the nav drawer with the correct items
@@ -411,18 +392,20 @@ public abstract class BaseActivity extends ActionBarActivity {
                 startActivity(intent);
                 finish();
                 break;
-            //TODO Add class
-            /*
             case NAVDRAWER_ITEM_SETTINGS:
                 intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 finish();
                 break;
             case NAVDRAWER_ITEM_ALERT:
-                intent = new Intent(this, AlertActivity.class);
-                startActivity(intent);
+                String number = "112";
+                Uri call = Uri.parse("tel:" + number);
+                Intent surf = new Intent(Intent.ACTION_DIAL, call);
+                startActivity(surf);
                 finish();
                 break;
+            //TODO Add class
+            /*
             case NAVDRAWER_ITEM_LOG_OUT:
                 intent = new Intent(this, LogOutActivity.class);
                 startActivity(intent);
@@ -466,21 +449,23 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
 
         ImageView coverImageView = (ImageView) findViewById(R.id.profile_cover_image);
-        TextView nameTextView = (TextView) findViewById(R.id.profile_name_text);
-        TextView email = (TextView) findViewById(R.id.profile_email_text);
+        TextView name1TextView = (TextView) findViewById(R.id.profile_name1_text);
+        TextView name2TextView = (TextView) findViewById(R.id.profile_name2_text);
+        TextView teamName = (TextView) findViewById(R.id.profile_team_name_text);
 
         /*
             Warning : Identification by photo may be include here
             After that the code will let the Program take the default photo
          */
 
-        String name = "Olivier NGUYEN QUOC & Loïc MOLLET PADIER";  //TODO Link with the database -> Contester's names
-        String team = "Golden Thumb"; //TODO Link with the database -> Team name
+        String name1 = "Olivier NGUYEN QUOC";
+        String name2 = "Loïc MOLLET PADIER";  //TODO Link with the database -> Contester's names
+        String team = "Golden Thumb super genial cool"; //TODO Link with the database -> Team name
 
-        nameTextView.setVisibility(View.VISIBLE);
-        nameTextView.setText(name);
+        name1TextView.setText(name1);
+        name2TextView.setText(name2);
 
-        email.setText(team);
+        teamName.setText(team);
 
         coverImageView.setImageResource(R.drawable.default_cover);
 

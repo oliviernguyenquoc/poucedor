@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Adapted from Google I/O 2014 App - Apache License, Version 2.0
+
+Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.poucedor.poucedor" >
 
@@ -34,16 +39,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity-->
-            <!--android:name="RankingActivity"-->
-            <!--android:label="@string/title_activity_ranking" >-->
-        <!--</activity>-->
+        <activity
+            android:name=".RankingActivity"
+            android:label="@string/title_activity_ranking" >
+        </activity>
 
-        <!--<service-->
-            <!--android:name=".ServiceBackground"-->
-            <!--android:enabled="true"-->
-            <!--android:exported="true" >-->
-        <!--</service>-->
+        <!-- <service -->
+        <!-- android:name=".ServiceBackground" -->
+        <!-- android:enabled="true" -->
+        <!-- android:exported="true" > -->
+        <!-- </service> -->
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>

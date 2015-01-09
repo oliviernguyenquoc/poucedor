@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+Adapted from Google I/O 2014 App - Apache License, Version 2.0
+
+Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
+-->
+
 <resources>
     <style name="AppTheme" parent="AppTheme.Base">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
         <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
     </style>
 </resources>
