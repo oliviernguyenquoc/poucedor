@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -88,11 +89,9 @@ public abstract class BaseActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutResource());
+        //setContentView(getLayoutResource());
 
         mHandler = new Handler();
-
-        getActionBarToolbar();
 
     }
 
@@ -162,11 +161,30 @@ public abstract class BaseActivity extends ActionBarActivity {
         autoShowOrHideActionBar(shouldShow);
     }
     */
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        getActionBarToolbar();
+    }
+
     private void setupNavDrawer() {
         // What nav drawer item should be selected?
         int selfItem = getSelfNavDrawerItem();
 
         drawer = (DrawerLayout) findViewById(R.id.drawer);
+        if (drawer == null) {
+            return;
+        }
+        drawer.setStatusBarBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+        if (selfItem == NAVDRAWER_ITEM_INVALID) {
+            // do not show a nav drawer
+            if (drawer != null) {
+                drawer.removeView(drawer);
+            }
+            drawer = null;
+            return;
+        }
 
         if (drawer != null) {
             //TODO Check use of variable
@@ -177,9 +195,6 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
 
         if (toolbar != null) {
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
             toolbar.setNavigationIcon(R.drawable.ic_ab_drawer);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
@@ -188,6 +203,7 @@ public abstract class BaseActivity extends ActionBarActivity {
                 }
             });
         }
+
 
         //Always bug on that. Solution :
         drawer.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
@@ -227,6 +243,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
         return toolbar;
     }
+
 
     /**
      * Populates the navigation drawer with the appropriate items.
@@ -390,19 +407,16 @@ public abstract class BaseActivity extends ActionBarActivity {
             case NAVDRAWER_ITEM_RANKING:
                 intent = new Intent(this, RankingActivity.class);
                 startActivity(intent);
-                finish();
                 break;
             case NAVDRAWER_ITEM_SETTINGS:
                 intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
-                finish();
                 break;
             case NAVDRAWER_ITEM_ALERT:
                 String number = "112";
                 Uri call = Uri.parse("tel:" + number);
                 Intent surf = new Intent(Intent.ACTION_DIAL, call);
                 startActivity(surf);
-                finish();
                 break;
             //TODO Add class
             /*
@@ -479,6 +493,17 @@ public abstract class BaseActivity extends ActionBarActivity {
         if (drawer != null) {
             drawer.closeDrawer(Gravity.START);
         }
+    }
+
+    protected void toolbarSetUpCase(){
+        Toolbar toolbar = getActionBarToolbar();
+        toolbar.setNavigationIcon(R.drawable.ic_up);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BaseActivity.this.finish();
+            }
+        });
     }
 
     protected abstract int getLayoutResource();

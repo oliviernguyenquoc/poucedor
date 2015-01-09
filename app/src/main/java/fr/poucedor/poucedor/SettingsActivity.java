@@ -18,18 +18,15 @@ public class SettingsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_ranking);
+        setContentView(R.layout.activity_settings);
+
+        toolbarSetUpCase();
     }
 
 
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_settings;
-    }
-
-    @Override
-    protected int getSelfNavDrawerItem() {
-        return NAVDRAWER_ITEM_SETTINGS;
     }
 
 }

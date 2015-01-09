@@ -29,6 +29,8 @@ public class MapActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_map);
+
         MapView mapView = (MapView) findViewById(R.id.mapview);
 
         MapController mapController = new MapController(mapView);
@@ -36,13 +38,13 @@ public class MapActivity extends BaseActivity {
         mapController.setZoom(7);
         mapView.setMinZoomLevel(4);
 
-        double lat = 48.8534100 * 1000000;
-        double lon = 2.3488000 * 1000000;
+        double lat = 51 * 1000000;
+        double lon = -5 * 1000000;
         GeoPoint p = new GeoPoint((int) lat, (int) lon);
         mapController.animateTo(p);
 
         mapView.setTileSource(TileSourceFactory.MAPNIK);
-        mapView.setBuiltInZoomControls(true);
+        //mapView.setBuiltInZoomControls(true);
         mapView.setMultiTouchControls(true);
 
         Drawable marker = getResources().getDrawable(android.R.drawable.star_big_on);

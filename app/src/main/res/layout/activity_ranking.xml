@@ -11,21 +11,13 @@
         android:layout_height="match_parent"
         android:background="#fff">
 
+        <include layout="@layout/toolbar_actionbar_with_headerbar" />
+
         <GridView
             android:id="@+id/rank_grid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize" />
-
     </RelativeLayout>
-
-    <!-- Nav drawer -->
-    <include layout="@layout/navdrawer" />
 
 </android.support.v4.widget.DrawerLayout>
