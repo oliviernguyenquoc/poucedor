@@ -14,12 +14,10 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.views.MapController;
 
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
-
 import android.os.Bundle;
 import android.graphics.drawable.Drawable;
+
+import fr.poucedor.poucedor.UI.MyItemizedOverlay;
 
 public class MapActivity extends BaseActivity {
 
@@ -38,13 +36,13 @@ public class MapActivity extends BaseActivity {
         mapController.setZoom(7);
         mapView.setMinZoomLevel(4);
 
+        // Center over France
         double lat = 51 * 1000000;
         double lon = -5 * 1000000;
         GeoPoint p = new GeoPoint((int) lat, (int) lon);
         mapController.animateTo(p);
 
         mapView.setTileSource(TileSourceFactory.MAPNIK);
-        //mapView.setBuiltInZoomControls(true);
         mapView.setMultiTouchControls(true);
 
         Drawable marker = getResources().getDrawable(android.R.drawable.star_big_on);

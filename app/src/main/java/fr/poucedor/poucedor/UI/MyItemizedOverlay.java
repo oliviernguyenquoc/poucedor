@@ -5,7 +5,7 @@
  *
  */
 
-package fr.poucedor.poucedor;
+package fr.poucedor.poucedor.UI;
 
 import java.util.ArrayList;
 

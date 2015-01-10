@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package fr.poucedor.poucedor;
+package fr.poucedor.poucedor.UI;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -24,6 +24,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+
+import fr.poucedor.poucedor.R;
 
 //import com.google.samples.apps.iosched.R;
 

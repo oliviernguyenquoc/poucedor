@@ -37,4 +37,11 @@
     <!-- Menu item to open the Log Out screen [CHAR_LIMIT=20] -->
     <string name="navdrawer_item_log_out">Déconnexion</string>
 
+
+    <!-- Settings -->
+    <string name="localisationCheckBoxText">Localisation automatique</string>
+    <string name="giveLocalisation">Donner ma localisation tous les</string>
+    <string name="everyTime">minutes</string>
+    <string name="localisationRecord">Localisation enregistrées toutes les</string>
+
 </resources>

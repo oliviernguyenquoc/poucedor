@@ -31,12 +31,12 @@ public class PoucedorProvider extends ContentProvider {
         poucedorDB = new PoucedorDB(getContext());
         return true;
     }
+
     @Override
     public String getType(Uri uri) {
         // TODO check value
         return "PositionList";
     }
-
 
 
     // Not used

@@ -1,8 +1,7 @@
-/*
+/**
  * Adapted from Google I/O 2014 App - Apache License, Version 2.0
  *
- * Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
- *
+ * @author MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
  */
 
 package fr.poucedor.poucedor;
@@ -15,7 +14,6 @@ import android.os.Build;
 import android.os.Bundle;
 
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -31,11 +29,25 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.net.Uri;
 
+/**
+ * BaseActivity is an abstract class which are herited by all classes wich contains Action bar.
+ * This activity add to child Activities ActionBar, NavigationDrawer ...
+ * <p/>
+ * To Add the navigation drawer, you must override getSelfNavDrawerItem() function.
+ *
+ * @see BaseActivity#getSelfNavDrawerItem() to have more explanation
+ * <p/>
+ * Too add item in the navigation drawer, you just have to add few things in lists and constants.
+ */
 public abstract class BaseActivity extends ActionBarActivity {
 
-    // symbols for navdrawer items (indices must correspond to array below). This is
-    // not a list of items that are necessarily *present* in the Nav Drawer; rather,
-    // it's a list of all possible items.
+    // Class Variables
+
+    /**
+     * Symbols for navdrawer items (indices must correspond to array below).
+     * This is not a list of items that are necessarily *present* in the Nav Drawer;
+     * rather, it's a list of all possible items.
+     */
     protected static final int NAVDRAWER_ITEM_MAP = 0;
     protected static final int NAVDRAWER_ITEM_RANKING = 1;
     protected static final int NAVDRAWER_ITEM_SETTINGS = 2;
@@ -45,7 +57,9 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected static final int NAVDRAWER_ITEM_SEPARATOR = -2;
     protected static final int NAVDRAWER_ITEM_SEPARATOR_SPECIAL = -3;
 
-    // titles for navdrawer items (indices must correspond to the above)
+    /**
+     * Titles for navdrawer items (indices must correspond to the above)
+     */
     private static final int[] NAVDRAWER_TITLE_RES_ID = new int[]{
             R.string.navdrawer_item_map,
             R.string.navdrawer_item_ranking,
@@ -54,7 +68,9 @@ public abstract class BaseActivity extends ActionBarActivity {
             R.string.navdrawer_item_log_out,
     };
 
-    // icons for navdrawer items (indices must correspond to above array)
+    /**
+     * Icons for navdrawer items (indices must correspond to above array)
+     */
     private static final int[] NAVDRAWER_ICON_RES_ID = new int[]{
             R.drawable.ic_drawer_map,  // Map
             R.drawable.ic_drawer_ranking,  // Ranking
@@ -63,46 +79,67 @@ public abstract class BaseActivity extends ActionBarActivity {
             R.drawable.ic_drawer_log_out,
     };
 
-    // Navigation drawer:
-    private LinearLayout mAccountListContainer;
-    private ViewGroup mDrawerItemsListContainer;
-    private Handler mHandler;
-
-    private Toolbar toolbar;
-    private DrawerLayout drawer;
-
-    // list of navdrawer items that were actually added to the navdrawer, in order
-    private ArrayList<Integer> mNavDrawerItems = new ArrayList<Integer>();
-
-    // views that correspond to each navdrawer item, null if not yet created
-    private View[] mNavDrawerItemViews = null;
-
-    // delay to launch nav drawer item, to allow close animation to play
+    /**
+     * Delay to launch nav drawer item, to allow close animation to play
+     */
     private static final int NAVDRAWER_LAUNCH_DELAY = 250;
 
-    // fade in and fade out durations for the main content when switching between
-    // different Activities of the app through the Nav Drawer
+    /**
+     * Fade in durations for the main content when switching between different Activities
+     * of the app through the Navigation Drawer
+     */
     private static final int MAIN_CONTENT_FADEOUT_DURATION = 150;
-    private static final int MAIN_CONTENT_FADEIN_DURATION = 250;
 
+    /**
+     * Navigation drawer
+     */
+    private LinearLayout mAccountListContainer;
+    private ViewGroup mDrawerItemsListContainer;
+    private DrawerLayout drawer;
+    private Handler mHandler;
+
+    /**
+     * Toolbar
+     */
+    private Toolbar toolbar;
+
+    /**
+     * List of navigation drawer items that were actually added to the navigation drawer, in order
+     */
+    private ArrayList<Integer> mNavDrawerItems = new ArrayList<Integer>();
+
+    /**
+     * Views that correspond to each navdrawer item, null if not yet created
+     */
+    private View[] mNavDrawerItemViews = null;
+
+    // Android Life Cycle Methods
+
+    public static void setAccessibilityIgnore(View view) {
+        view.setClickable(false);
+        view.setFocusable(false);
+        view.setContentDescription("");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(getLayoutResource());
 
         mHandler = new Handler();
-
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+
+        // Setup of the navigation drawer
         setupNavDrawer();
+
+        // Setup of the little box on the top of the navigation drawer
         setupAccountBox();
-
-        //Normalement, il y a tout dans cette partie mais pas sûr
-
     }
 
     @Override
@@ -118,7 +155,6 @@ public abstract class BaseActivity extends ActionBarActivity {
                 drawer.openDrawer(Gravity.START);
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -131,43 +167,19 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
     }
 
-    /**
-     * Indicates that the main content has scrolled (for the purposes of showing/hiding
-     * the action bar for the "action bar auto hide" effect). currentY and deltaY may be exact
-     * (if the underlying view supports it) or may be approximate indications:
-     * deltaY may be INT_MAX to mean "scrolled forward indeterminately" and INT_MIN to mean
-     * "scrolled backward indeterminately".  currentY may be 0 to mean "somewhere close to the
-     * start of the list" and INT_MAX to mean "we don't know, but not at the start of the list"
-     */
-
-    /* NOT NEEDED BUT CAN BE USEFULL IN CASE OF LONG CONTENT
-    private void onMainContentScrolled(int currentY, int deltaY) {
-        if (deltaY > mActionBarAutoHideSensivity) {
-            deltaY = mActionBarAutoHideSensivity;
-        } else if (deltaY < -mActionBarAutoHideSensivity) {
-            deltaY = -mActionBarAutoHideSensivity;
-        }
-
-        if (Math.signum(deltaY) * Math.signum(mActionBarAutoHideSignal) < 0) {
-            // deltaY is a motion opposite to the accumulated signal, so reset signal
-            mActionBarAutoHideSignal = deltaY;
-        } else {
-            // add to accumulated signal
-            mActionBarAutoHideSignal += deltaY;
-        }
-
-        boolean shouldShow = currentY < mActionBarAutoHideMinY ||
-                (mActionBarAutoHideSignal <= -mActionBarAutoHideSensivity);
-        autoShowOrHideActionBar(shouldShow);
-    }
-    */
-
+    // Override this function to setup the action bar just after the usual instruction setContentView
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
         getActionBarToolbar();
     }
 
+    /**
+     * Set up OR NOT the navigation drawer.
+     *
+     * @see BaseActivity#getSelfNavDrawerItem() to have more explanation about setting either the
+     * navigation drawer icon or a back button in the action bar
+     */
     private void setupNavDrawer() {
         // What nav drawer item should be selected?
         int selfItem = getSelfNavDrawerItem();
@@ -176,7 +188,9 @@ public abstract class BaseActivity extends ActionBarActivity {
         if (drawer == null) {
             return;
         }
+
         drawer.setStatusBarBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+
         if (selfItem == NAVDRAWER_ITEM_INVALID) {
             // do not show a nav drawer
             if (drawer != null) {
@@ -186,35 +200,26 @@ public abstract class BaseActivity extends ActionBarActivity {
             return;
         }
 
-        if (drawer != null) {
-            //TODO Check use of variable
-            final View chosenAccountContentView = findViewById(R.id.chosen_account_content_view);
-            final View chosenAccountView = findViewById(R.id.chosen_account_view);
-            final int navDrawerChosenAccountHeight = getResources().getDimensionPixelSize(
-                    R.dimen.navdrawer_chosen_account_height);
-        }
-
         if (toolbar != null) {
             toolbar.setNavigationIcon(R.drawable.ic_ab_drawer);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //To avoid double item selection, we update the list every click
+                    //To avoid double item selection, we update the list every click thanks to "populateNavDrawer()"
                     populateNavDrawer();
                     drawer.openDrawer(Gravity.START);
                 }
             });
         }
 
-
-        //Always bug on that. Solution :
         drawer.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
 
-        // populate the nav drawer with the correct items
+        // Populate the nav drawer with the correct items
         populateNavDrawer();
 
 
         //TODO It can be cool if we can do it
+        // Easy to do
         /*
         // When the user runs the app for the first time, we want to land them with the
         // navigation drawer open. But just the first time.
@@ -230,7 +235,8 @@ public abstract class BaseActivity extends ActionBarActivity {
     /**
      * Returns the navigation drawer item that corresponds to this Activity. Subclasses
      * of BaseActivity override this to indicate what nav drawer item corresponds to them
-     * Return NAVDRAWER_ITEM_INVALID to mean that this Activity should not have a Nav Drawer.
+     *
+     * @return NAVDRAWER_ITEM_INVALID to mean that this Activity should not have a Nav Drawer.
      */
     protected int getSelfNavDrawerItem() {
         return NAVDRAWER_ITEM_INVALID;
@@ -246,23 +252,20 @@ public abstract class BaseActivity extends ActionBarActivity {
         return toolbar;
     }
 
-
     /**
      * Populates the navigation drawer with the appropriate items.
      */
     private void populateNavDrawer() {
         mNavDrawerItems.clear();
 
-        // Map is always shown
+        // Main items
         mNavDrawerItems.add(NAVDRAWER_ITEM_MAP);
         mNavDrawerItems.add(NAVDRAWER_ITEM_RANKING);
 
-        //mNavDrawerItems.add(NAVDRAWER_ITEM_SEPARATOR);
-
-
-        // Other items that are always in the nav drawer irrespective of whether the
-        // attendee is on-site or remote:
+        // Indication (Can be usefull) : mNavDrawerItems.add(NAVDRAWER_ITEM_SEPARATOR);
         mNavDrawerItems.add(NAVDRAWER_ITEM_SEPARATOR_SPECIAL);
+
+        // Other items
         mNavDrawerItems.add(NAVDRAWER_ITEM_SETTINGS);
         mNavDrawerItems.add(NAVDRAWER_ITEM_ALERT);
         mNavDrawerItems.add(NAVDRAWER_ITEM_LOG_OUT);
@@ -300,7 +303,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         if (isSeparator(itemId)) {
             // we are done
-            setAccessibilityIgnore(view); //TODO Check and verify
+            setAccessibilityIgnore(view); //TODO Check and verify. I think this is ok
             return view;
         }
 
@@ -330,15 +333,6 @@ public abstract class BaseActivity extends ActionBarActivity {
         return view;
     }
 
-    public static void setAccessibilityIgnore(View view) {
-        view.setClickable(false);
-        view.setFocusable(false);
-        view.setContentDescription("");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            view.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
-        }
-    }
-
     private boolean isSeparator(int itemId) {
         return itemId == NAVDRAWER_ITEM_SEPARATOR || itemId == NAVDRAWER_ITEM_SEPARATOR_SPECIAL;
     }
@@ -356,7 +350,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             view.setBackgroundResource(R.drawable.selected_navdrawer_item_background);
         }
 
-        // configure its appearance according to whether or not it's selected
+        // Configure its appearance according to whether or not it's selected
         titleView.setTextColor(selected ?
                 getResources().getColor(R.color.navdrawer_text_color_selected) :
                 getResources().getColor(R.color.navdrawer_text_color));
@@ -374,7 +368,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         if (isSpecialItem(itemId)) {
             goToNavDrawerItem(itemId);
         } else {
-            // launch the target Activity after a short delay, to allow the close animation to play
+            // Launch the target Activity after a short delay, to allow the close animation to play
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -382,9 +376,9 @@ public abstract class BaseActivity extends ActionBarActivity {
                 }
             }, NAVDRAWER_LAUNCH_DELAY);
 
-            // change the active item on the list so the user can see the item changed
+            // Change the active item on the list so the user can see the item changed
             setSelectedNavDrawerItem(itemId);
-            // fade out the main content
+            // Fade out the main content
             View mainContent = findViewById(getLayoutResource());
             if (mainContent != null) {
                 mainContent.animate().alpha(0).setDuration(MAIN_CONTENT_FADEOUT_DURATION);
@@ -432,7 +426,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     }
 
     /**
-     * Sets up the given navdrawer item's appearance to the selected state. Note: this could
+     * Sets up the given navigation drawer item's appearance to the selected state. Note: this could
      * also be accomplished (perhaps more cleanly) with state-based layouts.
      */
     private void setSelectedNavDrawerItem(int itemId) {
@@ -446,16 +440,17 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
     }
 
-    /**
-     * Sets up the account box. The account box is the area at the top of the nav drawer that
-     * shows which account the user is logged in as, and lets them switch accounts.
-     */
-
     /*
         WARNING : Users are not allowed to upload their photos on the website yet.
         This features may be implemented in the futur.
         Any codes in comment can help the link between the website and the Android App
      */
+
+    /**
+     * Sets up the account box. The account box is the area at the top of the nav drawer that
+     * shows which account the user is logged in as, and lets them switch accounts.
+     */
+
     private void setupAccountBox() {
         mAccountListContainer = (LinearLayout) findViewById(R.id.account_list);
 
@@ -497,7 +492,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
     }
 
-    protected void toolbarSetUpCase(){
+    protected void toolbarSetUpCase() {
         Toolbar toolbar = getActionBarToolbar();
         toolbar.setNavigationIcon(R.drawable.ic_up);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -508,6 +503,11 @@ public abstract class BaseActivity extends ActionBarActivity {
         });
     }
 
+    /**
+     * Must be override to return the layout of child Activity
+     *
+     * @return the reference of the layout of child Activity
+     */
     protected abstract int getLayoutResource();
 
 }
