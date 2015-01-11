@@ -7,7 +7,6 @@
 -->
 
 <resources>
-    <style name="AppTheme" parent="AppTheme.Base"/>
 
     <style name="AppTheme.Base" parent="Theme.AppCompat">
         <item name="colorPrimary">@color/colorPrimary</item>

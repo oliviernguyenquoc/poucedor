@@ -36,4 +36,6 @@ Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
 
     <dimen name="keyline_1">16dp</dimen>
 
+    <dimen name="headerbar_elevation">4dp</dimen>
+
 </resources>

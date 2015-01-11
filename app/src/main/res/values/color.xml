@@ -14,7 +14,7 @@
 
     <color name="windowBackgroundColor">#FFFFFF</color>
 
-    <color name="navdrawer_background">#ffffffff</color>
+    <color name="navdrawer_background">#FFFFFF</color>
 
     <color name="navdrawer_text_color">@color/body_text_1</color>
     <color name="navdrawer_text_color_selected">@color/colorPrimary</color>
