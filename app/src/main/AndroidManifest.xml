@@ -31,6 +31,7 @@ Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
             android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -43,7 +44,6 @@ Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
             android:name=".RankingActivity"
             android:label="@string/title_activity_ranking"
             android:parentActivityName=".MapActivity" >
-
         </activity>
 
         <!-- <service -->
@@ -53,7 +53,11 @@ Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
         <!-- </service> -->
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings">
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name=".WhatIsActivity"
+            android:label="@string/title_activity_what_is" >
         </activity>
     </application>
 

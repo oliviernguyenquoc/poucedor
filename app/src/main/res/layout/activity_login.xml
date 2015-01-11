@@ -20,13 +20,13 @@
         android:contentDescription="@string/app_name"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/pouce_logo"
-        android:paddingTop="30dp"
+        android:paddingTop="10dp"
         android:scaleType="centerCrop"
         android:paddingBottom="10dp" />
 
     <ScrollView android:id="@+id/login_form" android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="200dp">
+        android:layout_height="208dp"
+        android:layout_marginTop="80dp">
 
         <LinearLayout android:id="@+id/email_login_form" android:layout_width="match_parent"
             android:layout_height="wrap_content" android:orientation="vertical">
@@ -50,6 +50,12 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <Button android:id="@+id/what_is_button" style="?android:textAppearanceSmall"
+        android:layout_width="match_parent" android:layout_height="80dp"
+        android:layout_marginTop="50dp" android:text="@string/what_is"
+        android:textStyle="bold"
+        android:textAllCaps="false" />
 
 </LinearLayout>
 

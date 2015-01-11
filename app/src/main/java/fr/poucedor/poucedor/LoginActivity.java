@@ -30,7 +30,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -95,6 +94,17 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mProgressView = findViewById(R.id.login_progress);
 
         logo = (ImageView) findViewById(R.id.pouce_logo);
+
+        Button mWhatIsButton = (Button) findViewById(R.id.what_is_button);
+        mWhatIsButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                intent = new Intent(LoginActivity.this, WhatIsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     // Create a loader spinner (Not sure)
