@@ -58,6 +58,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private Button mWhatIsButton;
     private ImageView logo;
 
     @Override
@@ -92,6 +93,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        mWhatIsButton = (Button) findViewById(R.id.what_is_button);
 
         logo = (ImageView) findViewById(R.id.pouce_logo);
 
@@ -193,11 +195,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mWhatIsButton.setVisibility(show ? View.GONE : View.VISIBLE);
             mLoginFormView.animate().setDuration(shortAnimTime).alpha(
                     show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                    mWhatIsButton.setVisibility(show ? View.GONE : View.VISIBLE);
                 }
             });
 
@@ -214,6 +218,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mWhatIsButton.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 

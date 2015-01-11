@@ -414,14 +414,11 @@ public abstract class BaseActivity extends ActionBarActivity {
                 Intent surf = new Intent(Intent.ACTION_DIAL, call);
                 startActivity(surf);
                 break;
-            //TODO Add class
-            /*
             case NAVDRAWER_ITEM_LOG_OUT:
-                intent = new Intent(this, LogOutActivity.class);
+                intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();
                 break;
-            */
         }
     }
 
