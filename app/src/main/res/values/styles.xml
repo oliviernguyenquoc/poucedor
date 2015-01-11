@@ -196,9 +196,4 @@
         <item name="android:background">?colorPrimary</item>
         <!--<item name="android:elevation">@dimen/headerbar_elevation</item>-->
     </style>
-
-    <style name="AppTheme.Fab" parent="FloatingActionButton">
-        <item name="floatingActionButtonColor">@color/floating_action_button_background</item>
-    </style>
-
 </resources>

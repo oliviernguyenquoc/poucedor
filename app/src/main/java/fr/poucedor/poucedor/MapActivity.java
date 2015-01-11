@@ -17,7 +17,10 @@ import org.osmdroid.views.MapController;
 import android.os.Bundle;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import com.melnykov.fab.FloatingActionButton;
 
 import fr.poucedor.poucedor.UI.MyItemizedOverlay;
 
@@ -67,6 +70,12 @@ public class MapActivity extends BaseActivity {
     }
 
     public void setFloatingActionButton(){
+        ListView listView = (ListView) findViewById(android.R.id.list);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        fab.attachToListView(listView);
+        if (android.os.Build.VERSION.SDK_INT >=21){
+            fab.setColorRipple(getResources().getColor(R.color.ripple));
+        }
         findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
