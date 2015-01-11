@@ -15,14 +15,15 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="136dp"
         android:id="@+id/pouce_logo"
         android:contentDescription="@string/app_name"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/pouce_logo"
-        android:paddingTop="10dp"
         android:scaleType="centerCrop"
-        android:paddingBottom="10dp" />
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:layout_weight="0.10" />
 
     <ScrollView android:id="@+id/login_form" android:layout_width="match_parent"
         android:layout_height="208dp"
