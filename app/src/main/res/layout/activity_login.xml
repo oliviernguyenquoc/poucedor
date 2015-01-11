@@ -27,7 +27,7 @@
 
     <ScrollView android:id="@+id/login_form" android:layout_width="match_parent"
         android:layout_height="208dp"
-        android:layout_marginTop="80dp">
+        android:layout_marginTop="40dp">
 
         <LinearLayout android:id="@+id/email_login_form" android:layout_width="match_parent"
             android:layout_height="wrap_content" android:orientation="vertical">
@@ -54,7 +54,7 @@
 
     <Button android:id="@+id/what_is_button" style="?android:textAppearanceSmall"
         android:layout_width="match_parent" android:layout_height="80dp"
-        android:layout_marginTop="50dp" android:text="@string/what_is"
+        android:layout_marginTop="20dp" android:text="@string/what_is"
         android:textStyle="bold"
         android:textAllCaps="false" />
 

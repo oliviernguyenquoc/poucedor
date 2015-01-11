@@ -8,15 +8,15 @@
     <!-- activity view -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#fff">
+        android:layout_height="match_parent">
 
         <include layout="@layout/toolbar_actionbar_with_headerbar" />
 
-        <GridView
-            android:id="@+id/rank_grid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <TableLayout android:id="@+id/table"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        </TableLayout>
 
     </RelativeLayout>
 
