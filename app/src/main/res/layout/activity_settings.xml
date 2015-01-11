@@ -19,47 +19,63 @@
             android:minHeight="?attr/actionBarSize" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
 
-            <CheckBox
-                android:id="@+id/checkBox"
-                android:layout_width="fill_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="40dp" />
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/localisationCheckBoxText"
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="40dp" />
+
+                <TextView
+                    android:id="@+id/localisationCheckBoxText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/localisationCheckBoxText" />
+
+            </LinearLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/localisationCheckBoxText" />
+                android:layout_height="match_parent"
+                android:paddingLeft="50dp">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/giveLocalisation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="@string/giveLocalisation" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/giveLocalisation"
+                    android:layout_toEndOf="@+id/giveLocalisation" />
 
-            <TextView
-                android:id="@+id/giveLocalisation"
-                android:layout_width="208dp"
-                android:layout_height="wrap_content"
-                android:paddingLeft="40dp"
-                android:text="@string/giveLocalisation" />
+                <TextView
+                    android:id="@+id/everyTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="@string/everyTime"
+                    android:layout_below="@+id/giveLocalisation"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
 
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="64dp"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/everyTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/everyTime" />
-
+            </RelativeLayout>
         </LinearLayout>
 
 

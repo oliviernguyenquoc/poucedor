@@ -26,6 +26,8 @@ public class SettingsActivity extends BaseActivity {
     private CheckBox localisationCheckbox;
     private TextView giveLocalisation, everyTime;
     private Spinner spinner;
+    //Variable to avoid toast to appear when setting the spinner
+    private boolean mIsSpinnerFirstCall;
 
 
     @Override
@@ -39,8 +41,21 @@ public class SettingsActivity extends BaseActivity {
         //localisationCheckbox.setText(R.string.localisationCheckBoxText);
         //localisationCheckbox.setChecked(true);
 
+        giveLocalisation = (TextView) findViewById(R.id.giveLocalisation);
+        everyTime = (TextView) findViewById(R.id.everyTime);
+        spinner = (Spinner) findViewById(R.id.spinner);
+
+        if (!localisationCheckbox .isChecked()) {
+            giveLocalisation.setVisibility(View.INVISIBLE);
+            everyTime.setVisibility(View.INVISIBLE);
+            spinner.setVisibility(View.INVISIBLE);
+        }
+
+
         addListenerOnLocalisationCheckbox();
 
+        //Variable to avoid toast to appear when setting the spinner
+        mIsSpinnerFirstCall=true;
         addTextAndSpinnerTimeSelection();
 
     }
@@ -54,8 +69,14 @@ public class SettingsActivity extends BaseActivity {
             public void onClick(View v) {
                 //is chkIos checked?
                 if (((CheckBox) v).isChecked()) {
-                    Toast.makeText(SettingsActivity.this,
-                            "Bro, try Android :)", Toast.LENGTH_LONG).show();
+                    giveLocalisation.setVisibility(View.VISIBLE);
+                    everyTime.setVisibility(View.VISIBLE);
+                    spinner.setVisibility(View.VISIBLE);
+                }
+                else{
+                    giveLocalisation.setVisibility(View.INVISIBLE);
+                    everyTime.setVisibility(View.INVISIBLE);
+                    spinner.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -70,13 +91,13 @@ public class SettingsActivity extends BaseActivity {
         giveLocalisation.setText(R.string.giveLocalisation);
 
         spinner = (Spinner) findViewById(R.id.spinner);
-        List<String> list = new ArrayList<String>();
-        list.add("5");
-        list.add("15");
-        list.add("30");
-        list.add("60");
+        final List<String> spinnerList = new ArrayList<String>();
+        spinnerList.add("5");
+        spinnerList.add("15");
+        spinnerList.add("30");
+        spinnerList.add("60");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
+                android.R.layout.simple_spinner_item, spinnerList);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
 
@@ -85,7 +106,14 @@ public class SettingsActivity extends BaseActivity {
             new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View view, int time, long id) {
-                    showToast(getResources().getString(R.string.localisationRecord) + " " + Integer.toString(time) + " " + getResources().getString(R.string.everyTime));
+                    //To avoid toast to appear when setting the spinner
+                    if(!mIsSpinnerFirstCall){
+                        showToast(getResources().getString(R.string.localisationRecord) + " " + spinnerList.get((int) id) + " " + getResources().getString(R.string.everyTime));
+
+                    }else
+                    {
+                        mIsSpinnerFirstCall=false;
+                    }
                 }
 
                 @Override
