@@ -154,6 +154,10 @@ public abstract class BaseActivity extends ActionBarActivity {
             case android.R.id.home:
                 drawer.openDrawer(Gravity.START);
                 return true;
+            case R.id.about:
+                Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

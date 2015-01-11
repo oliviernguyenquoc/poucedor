@@ -59,6 +59,10 @@ Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
             android:name=".WhatIsActivity"
             android:label="@string/title_activity_what_is" >
         </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_about" >
+        </activity>
     </application>
 
 </manifest>

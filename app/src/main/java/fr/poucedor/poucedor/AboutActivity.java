@@ -1,10 +1,13 @@
 package fr.poucedor.poucedor;
 
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 
-public class WhatIsActivity extends BaseActivity {
+public class AboutActivity extends BaseActivity {
 
 
     //UI Reference
@@ -14,7 +17,7 @@ public class WhatIsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_what_is);
+        setContentView(R.layout.activity_about);
 
         toolbarSetUpCase();
 
@@ -22,7 +25,7 @@ public class WhatIsActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.activity_what_is;
+        return R.layout.activity_about;
     }
 
 }

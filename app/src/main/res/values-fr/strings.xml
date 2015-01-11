@@ -24,6 +24,8 @@
     <string name="error_field_required">This field is required</string>
     <string name="what_is">Pouce d\'Or : \n Qu\'est ce que c\'est ?</string>
 
+    <string name="about">A propos de</string>
+
 
     <!-- NavDrawer Names -->
 
@@ -74,4 +76,13 @@
         deserunt mollit anim id est laborum</string>
     <string name="more_informations">Pour plus d\'informations :</string>
     <string name="pouce_url">www.poucedor.fr</string>
+
+    <string name="title_activity_about">A propos</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- About Activity -->
+    <string name="loic_title">Loïc MOLLET-PADIER</string>
+    <string name="loic_body">Etudiant en informatique à l\'école Centrale de Nantes</string>
+    <string name="olivier_title">Olivier NGUYEN QUOC</string>
+    <string name="olivier_body">Etudiant en informatique à l\'école Centrale de Nantes</string>
 </resources>
