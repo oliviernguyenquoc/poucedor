@@ -12,8 +12,7 @@
     <color name="colorSecondary">#FF8F00</color>
     <color name="colorSecondaryDark">#FF6F00</color>
 
-    <color name="windowBackgroundColor">#333333</color>
-    <color name="black_translucent">#80000000</color>
+    <color name="windowBackgroundColor">#FFFFFF</color>
 
     <color name="navdrawer_background">#ffffffff</color>
 
@@ -35,5 +34,7 @@
 
     <color name="body_text_1_inverse">#deffffff</color>
     <color name="body_text_2_inverse">#8affffff</color>
+
+    <color name="floating_action_button_background">#FFFFFF</color>
 
 </resources>

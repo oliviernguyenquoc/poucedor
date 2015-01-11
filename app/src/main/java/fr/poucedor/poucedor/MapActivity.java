@@ -16,6 +16,8 @@ import org.osmdroid.views.MapController;
 
 import android.os.Bundle;
 import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.widget.Toast;
 
 import fr.poucedor.poucedor.UI.MyItemizedOverlay;
 
@@ -60,6 +62,17 @@ public class MapActivity extends BaseActivity {
         GeoPoint myPoint2 = new GeoPoint((int) 48.8534100 * 1000000, (int) 2.3488000 * 1000000);
         myItemizedOverlay.addItem(myPoint2, "myPoint2", "myPoint2");
 
+        setFloatingActionButton();
+
+    }
+
+    public void setFloatingActionButton(){
+        findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MapActivity.this, "Clicked Floating Action Button", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

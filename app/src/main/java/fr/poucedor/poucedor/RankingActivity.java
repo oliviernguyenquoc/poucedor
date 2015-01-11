@@ -10,7 +10,6 @@ package fr.poucedor.poucedor;
 import android.os.Bundle;
 
 
-
 public class RankingActivity extends BaseActivity {
 
     //UI Reference

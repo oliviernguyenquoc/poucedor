@@ -14,6 +14,5 @@ Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
         <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
     </style>
 </resources>

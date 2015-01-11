@@ -35,12 +35,30 @@ public class SettingsActivity extends BaseActivity {
 
         toolbarSetUpCase();
 
-        localisationCheckbox = new CheckBox(this);
-        localisationCheckbox.setText(R.string.localisationCheckBoxText);
-        localisationCheckbox.setChecked(true);
+        localisationCheckbox = (CheckBox) findViewById(R.id.checkBox);
+        //localisationCheckbox.setText(R.string.localisationCheckBoxText);
+        //localisationCheckbox.setChecked(true);
+
+        addListenerOnLocalisationCheckbox();
 
         addTextAndSpinnerTimeSelection();
 
+    }
+
+    public void addListenerOnLocalisationCheckbox() {
+
+        localisationCheckbox = (CheckBox) findViewById(R.id.checkBox);
+
+        localisationCheckbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //is chkIos checked?
+                if (((CheckBox) v).isChecked()) {
+                    Toast.makeText(SettingsActivity.this,
+                            "Bro, try Android :)", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     void showToast(CharSequence msg) {
@@ -48,7 +66,7 @@ public class SettingsActivity extends BaseActivity {
     }
 
     public void addTextAndSpinnerTimeSelection() {
-        giveLocalisation = new TextView(this);
+        giveLocalisation = (TextView) findViewById(R.id.giveLocalisation);
         giveLocalisation.setText(R.string.giveLocalisation);
 
         spinner = (Spinner) findViewById(R.id.spinner);
@@ -64,16 +82,17 @@ public class SettingsActivity extends BaseActivity {
 
         spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parentView, View view, int time, long id) {
-                        showToast(getResources().getString(R.string.localisationRecord) + " " + Integer.toString(time) + " " + getResources().getString(R.string.everyTime));
-                    }
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View view, int time, long id) {
+                    showToast(getResources().getString(R.string.localisationRecord) + " " + Integer.toString(time) + " " + getResources().getString(R.string.everyTime));
+                }
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parentView) {
-                    }
-                });
+                @Override
+                public void onNothingSelected(AdapterView<?> parentView) {
+                    //Just do nothing
+                }
+            });
 
         everyTime = new TextView(this);
         everyTime.setText(R.string.everyTime);
