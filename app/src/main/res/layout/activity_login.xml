@@ -15,7 +15,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="136dp"
+        android:layout_height="wrap_content"
         android:id="@+id/pouce_logo"
         android:contentDescription="@string/app_name"
         android:layout_gravity="center_horizontal"
@@ -51,6 +51,12 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_gravity="right" />
 
     <Button android:id="@+id/what_is_button" style="?android:textAppearanceSmall"
         android:layout_width="match_parent" android:layout_height="80dp"
