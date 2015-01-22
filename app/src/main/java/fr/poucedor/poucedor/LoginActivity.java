@@ -313,7 +313,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 Log.v("ERROR", "######################################################################");
                 return false;
             }
-            SharedPreferences settings = getPreferences(0);
+            SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
             SharedPreferences.Editor editor = settings.edit();
             editor.putString("token", response.token);
             editor.putString("id", response._id);
@@ -323,7 +323,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             editor.putString("surname1", student1Name.length == 2 ? student1Name[1] : "");
             editor.putString("name2", student2Name.length >= 1 ? student2Name[0] : "");
             editor.putString("surname2", student2Name.length == 2 ? student2Name[1] : "");
-            editor.putString("name", response.name);
+            editor.putString("teamName", response.teamName);
+            editor.apply();
             return true;
         }
 

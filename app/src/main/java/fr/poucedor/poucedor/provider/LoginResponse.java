@@ -10,5 +10,5 @@ public class LoginResponse {
     public Team.Student student1;
     public Team.Student student2;
 
-    public String name;
+    public String teamName;
 }

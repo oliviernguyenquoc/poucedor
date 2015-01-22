@@ -21,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -477,6 +478,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         //TODO  Store names, surnames and teamName at the identification Activity
 
         // Restore preferences
+        Log.v("SETUP ACCOUNT BOX", "################################");
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         String name1 = settings.getString("name1", "Name 1");
         String surname1 = settings.getString("surname1", "Surname 1");
