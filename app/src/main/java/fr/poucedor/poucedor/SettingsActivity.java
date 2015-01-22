@@ -68,6 +68,9 @@ public class SettingsActivity extends BaseActivity {
 
     }
 
+    /**
+     * Function to add a listener to the checkbox (Enable/disable automatic location)
+     */
     public void addListenerOnLocalisationCheckbox() {
 
         // We need an Editor object to make preference changes.
@@ -101,10 +104,17 @@ public class SettingsActivity extends BaseActivity {
         });
     }
 
+    /**
+     * Show a toast
+     * @param msg The message to show
+     */
     void showToast(CharSequence msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * All to setup the spinner to select the interval between 2 automatic locations
+     */
     public void addTextAndSpinnerTimeSelection() {
 
         // We need an Editor object to make preference changes.
@@ -117,6 +127,7 @@ public class SettingsActivity extends BaseActivity {
         giveLocalisation = (TextView) findViewById(R.id.giveLocalisation);
         giveLocalisation.setText(R.string.giveLocalisation);
 
+        //To refere to choice just after. Do not forget to change this list if you change the spinnerList
         final List<Integer> equivalentList = new ArrayList<>();
         equivalentList.add(20);
         equivalentList.add(40);
@@ -134,6 +145,7 @@ public class SettingsActivity extends BaseActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
 
+        //Select automatically the choice saved in the preference
         spinner.setSelection(equivalentList.indexOf(locationTimePref));
 
         spinner = (Spinner) findViewById(R.id.spinner);
@@ -143,8 +155,6 @@ public class SettingsActivity extends BaseActivity {
                 public void onItemSelected(AdapterView<?> parentView, View view, int time, long id) {
 
                     editor2.putInt("locationTime", equivalentList.get((int) id));
-
-                    System.out.println(editor2);
 
                     // Commit the edits!
                     editor2.commit();
@@ -167,7 +177,7 @@ public class SettingsActivity extends BaseActivity {
 
     }
 
-
+    
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_settings;
