@@ -177,7 +177,7 @@ public class SettingsActivity extends BaseActivity {
 
     }
 
-    
+
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_settings;
