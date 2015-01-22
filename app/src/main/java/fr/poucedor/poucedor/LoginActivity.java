@@ -14,6 +14,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -21,6 +22,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,6 +36,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.poucedor.poucedor.provider.LoginRequest;
+import fr.poucedor.poucedor.provider.LoginResponse;
+import fr.poucedor.poucedor.provider.MyRetrofitErrorHandler;
+import fr.poucedor.poucedor.provider.PoucedorService;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 
 
 /**
@@ -167,9 +176,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
-            Intent intent = new Intent(this, MapActivity.class);
-            startActivity(intent);
-            finish();
+
         }
     }
 
@@ -292,35 +299,46 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setEndpoint("http://www.poucedor.fr/") // The base API endpoint.
+                    .build();
 
+            PoucedorService pouceRest = restAdapter.create(PoucedorService.class);
+            LoginResponse response;
             try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
+                Log.v("BEFORE","######################################################################");
+                response = pouceRest.login(new LoginRequest(mEmail, mPassword));
+                Log.v("AFTER", "######################################################################");
+            } catch(RetrofitError err) {
+                Log.v("ERROR", "######################################################################");
                 return false;
             }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
+            SharedPreferences settings = getPreferences(0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putString("token", response.token);
+            editor.putString("id", response._id);
+            String[] student1Name = response.student1.name.split(" ", 1);
+            String[] student2Name = response.student2.name.split(" ", 1);
+            editor.putString("name1", student1Name.length >= 1 ? student1Name[0] : "");
+            editor.putString("surname1", student1Name.length == 2 ? student1Name[1] : "");
+            editor.putString("name2", student2Name.length >= 1 ? student2Name[0] : "");
+            editor.putString("surname2", student2Name.length == 2 ? student2Name[1] : "");
+            editor.putString("name", response.name);
             return true;
         }
 
         @Override
         protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
+            Log.v("OPE","#########################################################");
+
 
             if (success) {
+                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                startActivity(intent);
                 finish();
             } else {
+                mAuthTask = null;
+                showProgress(false);
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
