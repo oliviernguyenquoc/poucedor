@@ -6,7 +6,6 @@
 
 package fr.poucedor.poucedor;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,8 +29,6 @@ public class SettingsActivity extends BaseActivity {
     //Variable to avoid toast to appear when setting the spinner
     private boolean mIsSpinnerFirstCall;
 
-    public static final String PREFS_NAME = "MyPrefsFile";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +37,9 @@ public class SettingsActivity extends BaseActivity {
 
         toolbarSetUpCase();
 
-        // Restore preferences
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        boolean locationEnable = settings.getBoolean("locationEnable", false);
-
         localisationCheckbox = (CheckBox) findViewById(R.id.checkBox);
         //localisationCheckbox.setText(R.string.localisationCheckBoxText);
-
-        if(locationEnable){
-            localisationCheckbox.setChecked(true);
-        }
+        //localisationCheckbox.setChecked(true);
 
         giveLocalisation = (TextView) findViewById(R.id.giveLocalisation);
         everyTime = (TextView) findViewById(R.id.everyTime);
@@ -72,11 +62,6 @@ public class SettingsActivity extends BaseActivity {
 
     public void addListenerOnLocalisationCheckbox() {
 
-        // We need an Editor object to make preference changes.
-        // All objects are from android.context.Context
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        final SharedPreferences.Editor editor = settings.edit();
-
         localisationCheckbox = (CheckBox) findViewById(R.id.checkBox);
 
         localisationCheckbox.setOnClickListener(new View.OnClickListener() {
@@ -87,19 +72,11 @@ public class SettingsActivity extends BaseActivity {
                     giveLocalisation.setVisibility(View.VISIBLE);
                     everyTime.setVisibility(View.VISIBLE);
                     spinner.setVisibility(View.VISIBLE);
-                    editor.putBoolean("locationEnable", true);
-
-                    // Commit the edits!
-                    editor.commit();
                 }
                 else{
                     giveLocalisation.setVisibility(View.INVISIBLE);
                     everyTime.setVisibility(View.INVISIBLE);
                     spinner.setVisibility(View.INVISIBLE);
-                    editor.putBoolean("locationEnable", true);
-
-                    // Commit the edits!
-                    editor.commit();
                 }
             }
         });
