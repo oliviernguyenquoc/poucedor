@@ -6,6 +6,7 @@
 
 package fr.poucedor.poucedor;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,10 +25,12 @@ public class SettingsActivity extends BaseActivity {
 
     //UI Reference
     private CheckBox localisationCheckbox;
-    private TextView giveLocalisation, everyTime;
+    private TextView giveLocalisation;
     private Spinner spinner;
     //Variable to avoid toast to appear when setting the spinner
     private boolean mIsSpinnerFirstCall;
+
+    public static final String PREFS_NAME = "MyPrefsFile";
 
 
     @Override
@@ -37,17 +40,22 @@ public class SettingsActivity extends BaseActivity {
 
         toolbarSetUpCase();
 
+        // Restore preferences
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        boolean locationEnablePref = settings.getBoolean("locationEnable", false);
+
         localisationCheckbox = (CheckBox) findViewById(R.id.checkBox);
         //localisationCheckbox.setText(R.string.localisationCheckBoxText);
-        //localisationCheckbox.setChecked(true);
+
+        if(locationEnablePref){
+            localisationCheckbox.setChecked(true);
+        }
 
         giveLocalisation = (TextView) findViewById(R.id.giveLocalisation);
-        everyTime = (TextView) findViewById(R.id.everyTime);
         spinner = (Spinner) findViewById(R.id.spinner);
 
-        if (!localisationCheckbox .isChecked()) {
+        if (!localisationCheckbox.isChecked()) {
             giveLocalisation.setVisibility(View.INVISIBLE);
-            everyTime.setVisibility(View.INVISIBLE);
             spinner.setVisibility(View.INVISIBLE);
         }
 
@@ -62,6 +70,11 @@ public class SettingsActivity extends BaseActivity {
 
     public void addListenerOnLocalisationCheckbox() {
 
+        // We need an Editor object to make preference changes.
+        // All objects are from android.context.Context
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        final SharedPreferences.Editor editor = settings.edit();
+
         localisationCheckbox = (CheckBox) findViewById(R.id.checkBox);
 
         localisationCheckbox.setOnClickListener(new View.OnClickListener() {
@@ -70,13 +83,19 @@ public class SettingsActivity extends BaseActivity {
                 //is chkIos checked?
                 if (((CheckBox) v).isChecked()) {
                     giveLocalisation.setVisibility(View.VISIBLE);
-                    everyTime.setVisibility(View.VISIBLE);
                     spinner.setVisibility(View.VISIBLE);
+                    editor.putBoolean("locationEnable", true);
+
+                    // Commit the edits!
+                    editor.commit();
                 }
                 else{
                     giveLocalisation.setVisibility(View.INVISIBLE);
-                    everyTime.setVisibility(View.INVISIBLE);
                     spinner.setVisibility(View.INVISIBLE);
+                    editor.putBoolean("locationEnable", true);
+
+                    // Commit the edits!
+                    editor.commit();
                 }
             }
         });
@@ -87,28 +106,52 @@ public class SettingsActivity extends BaseActivity {
     }
 
     public void addTextAndSpinnerTimeSelection() {
+
+        // We need an Editor object to make preference changes.
+        // All objects are from android.context.Context
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        final SharedPreferences.Editor editor2 = settings.edit();
+
+        int locationTimePref = settings.getInt("locationTime", 60);
+
         giveLocalisation = (TextView) findViewById(R.id.giveLocalisation);
         giveLocalisation.setText(R.string.giveLocalisation);
 
+        final List<Integer> equivalentList = new ArrayList<>();
+        equivalentList.add(20);
+        equivalentList.add(40);
+        equivalentList.add(60);
+        equivalentList.add(120);
+
         spinner = (Spinner) findViewById(R.id.spinner);
-        final List<String> spinnerList = new ArrayList<String>();
-        spinnerList.add("5");
-        spinnerList.add("15");
-        spinnerList.add("30");
-        spinnerList.add("60");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+        final List<String> spinnerList = new ArrayList<>();
+        spinnerList.add("20 " + getResources().getString(R.string.minutes));
+        spinnerList.add("40 "  + getResources().getString(R.string.minutes));
+        spinnerList.add("1 " + getResources().getString(R.string.hour));
+        spinnerList.add("2 "  + getResources().getString(R.string.hours));
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, spinnerList);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
+
+        spinner.setSelection(equivalentList.indexOf(locationTimePref));
 
         spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(
             new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View view, int time, long id) {
+
+                    editor2.putInt("locationTime", equivalentList.get((int) id));
+
+                    System.out.println(editor2);
+
+                    // Commit the edits!
+                    editor2.commit();
+
                     //To avoid toast to appear when setting the spinner
                     if(!mIsSpinnerFirstCall){
-                        showToast(getResources().getString(R.string.localisationRecord) + " " + spinnerList.get((int) id) + " " + getResources().getString(R.string.everyTime));
+                        showToast(getResources().getString(R.string.localisationRecord) + " " + spinnerList.get((int) id) );
 
                     }else
                     {
@@ -122,8 +165,6 @@ public class SettingsActivity extends BaseActivity {
                 }
             });
 
-        everyTime = new TextView(this);
-        everyTime.setText(R.string.everyTime);
     }
 
 

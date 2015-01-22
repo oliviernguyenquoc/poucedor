@@ -57,21 +57,12 @@
 
                 <Spinner
                     android:id="@+id/spinner"
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/giveLocalisation"
                     android:layout_toEndOf="@+id/giveLocalisation" />
 
-                <TextView
-                    android:id="@+id/everyTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:text="@string/everyTime"
-                    android:layout_below="@+id/giveLocalisation"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
 
             </RelativeLayout>
         </LinearLayout>

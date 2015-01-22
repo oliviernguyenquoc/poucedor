@@ -56,8 +56,10 @@
 
     <string name="localisationCheckBoxText">Automatic localisation</string>
     <string name="giveLocalisation">Give my localisation every</string>
-    <string name="everyTime">minutes</string>
     <string name="localisationRecord">Localisation recorded every</string>
+    <string name="minutes">minutes</string>
+    <string name="hour">hour</string>
+    <string name="hours">hours</string>
 
     <!-- Navigation bar text for the map -->
     <string name="title_map">Map</string>

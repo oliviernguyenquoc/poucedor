@@ -44,9 +44,10 @@
     <!-- Settings -->
     <string name="localisationCheckBoxText">Localisation automatique</string>
     <string name="giveLocalisation">Donner ma localisation toutes les</string>
-    <string name="everyTime">minutes</string>
     <string name="localisationRecord">Localisation enregistrées toutes les</string>
-    <string name="title_activity_what_is">Pouce d\'Or : Qu\'est que c\'est ?</string>
+    <string name="minutes">minutes</string>
+    <string name="hour">heure</string>
+    <string name="hours">heures</string>
 
     <!-- WhatItIs Activity-->
     <string name="contest_title">Un concours</string>
