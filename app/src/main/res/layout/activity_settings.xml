@@ -11,10 +11,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/toolbar"/>
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -71,7 +73,8 @@
                     android:text="@string/everyTime"
                     android:layout_below="@+id/giveLocalisation"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentStart="true"
+                    android:paddingTop="5dp" />
 
             </RelativeLayout>
         </LinearLayout>

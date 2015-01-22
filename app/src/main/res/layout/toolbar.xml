@@ -1,11 +1,7 @@
-<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:iosched="http://schemas.android.com/apk/res-auto"
-    style="@style/HeaderBar"
-    iosched:theme="@style/ActionBarThemeOverlay"
-    iosched:popupTheme="@style/ActionBarPopupThemeOverlay"
-    android:id="@+id/toolbar"
-    iosched:titleTextAppearance="@style/ActionBar.TitleText"
-    android:layout_width="match_parent"
-    android:layout_height="?actionBarSize"/>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <!--iosched:contentInsetStart="?actionBarInsetStart"-->
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>

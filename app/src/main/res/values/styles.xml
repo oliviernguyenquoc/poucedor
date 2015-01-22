@@ -28,7 +28,7 @@
     <style name="ActionBarPopupThemeOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="ActionBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">#fff</item>
         <item name="android:textSize">18sp</item>
     </style>
 </resources>
