@@ -9,8 +9,6 @@ package fr.poucedor.poucedor;
 
 import android.content.Intent;
 
-import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Build;
 import android.os.Bundle;
@@ -58,8 +56,6 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected static final int NAVDRAWER_ITEM_INVALID = -1;
     protected static final int NAVDRAWER_ITEM_SEPARATOR = -2;
     protected static final int NAVDRAWER_ITEM_SEPARATOR_SPECIAL = -3;
-
-    public static final String PREFS_NAME = "MyPrefsFile";
 
     /**
      * Titles for navdrawer items (indices must correspond to the above)
@@ -474,18 +470,9 @@ public abstract class BaseActivity extends ActionBarActivity {
             After that the code will let the Program take the default photo
          */
 
-        //TODO  Store names, surnames and teamName at the identification Activity
-
-        // Restore preferences
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        String name1 = settings.getString("name1", "Name 1");
-        String surname1 = settings.getString("surname1", "Surname 1");
-        String name2 = settings.getString("name2", "Name 2");
-        String surname2 = settings.getString("surname2", "Surname 2");
-        String team = settings.getString("teamName", "Team Name");
-
-        name1 = surname1 + " " + name1;
-        name2 = surname2 + " " + name2;
+        String name1 = "Olivier NGUYEN QUOC";
+        String name2 = "Loïc MOLLET PADIER";  //TODO Link with the database -> Contester's names
+        String team = "Golden Thumb super genial cool"; //TODO Link with the database -> Team name
 
         name1TextView.setText(name1);
         name2TextView.setText(name2);
