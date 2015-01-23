@@ -1,38 +1,35 @@
 package fr.poucedor.poucedor.provider;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.util.Log;
 
 import java.util.List;
 
-import fr.poucedor.poucedor.provider.DatabaseContract;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by loic on 09/01/15.
+ * Created by loic on 23/01/15.
  */
-public class TestClass {
+public class RestFactoryProvider extends RestFactory {
 
-    public TestClass() {
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint("http://www.poucedor.fr/") // The base API endpoint.
-                .build();
+    private String token;
+    private ContentResolver contentResolver;
 
-        PoucedorService pouceRest = restAdapter.create(PoucedorService.class);
+    public RestFactoryProvider(String token, ContentResolver contentResolver) {
+        super();
+        this.token = token;
+        this.contentResolver = contentResolver;
+    }
 
-
+    public void getServerData() {
         Callback<List<Team>> callback = new Callback<List<Team>>() {
             @Override
             public void success(List<Team> teams, Response response) {
-//                PoucedorProvider poucedorProvider = ;
                 ContentValues values;
                 for (Team team : teams) {
-                    PoucedorProvider poucedorProvider = new PoucedorProvider();
                     values = new ContentValues();
                     values.put(DatabaseContract.Team._ID, team.id);
                     values.put(DatabaseContract.Team.COLUMN_NAME_NAME, team.name);
@@ -47,7 +44,7 @@ public class TestClass {
                     values.put(DatabaseContract.University.TABLE_NAME + "." + DatabaseContract.University.COLUMN_NAME_NAME, team.university.name);
                     values.put(DatabaseContract.University.TABLE_NAME + "." + DatabaseContract.University.COLUMN_NAME_LATITUDE, team.university.location.lat);
                     values.put(DatabaseContract.University.TABLE_NAME + "." + DatabaseContract.University.COLUMN_NAME_LONGITUDE, team.university.location.lon);
-                    poucedorProvider.insert(PoucedorProvider.CONTENT_URI, values);
+                    contentResolver.insert(PoucedorProvider.CONTENT_URI, values);
 
                 }
             }
@@ -57,7 +54,6 @@ public class TestClass {
 
             }
         };
-
-        pouceRest.teams("", callback);
+        pouceRest.teams(token, callback);
     }
 }

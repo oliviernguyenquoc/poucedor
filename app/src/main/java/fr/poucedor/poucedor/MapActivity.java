@@ -55,8 +55,8 @@ public class MapActivity extends BaseActivity implements LoaderManager.LoaderCal
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-//        switch (id) {
-//            case URL_LOADER:
+        switch (id) {
+            case URL_LOADER:
                 return new CursorLoader(
                         this,
                         PoucedorProvider.CONTENT_URI,
@@ -74,26 +74,26 @@ public class MapActivity extends BaseActivity implements LoaderManager.LoaderCal
                         null,
                         null
                 );
-//            default:
-//                return null;
-//        }
+            default:
+                return null;
+        }
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null) {
-            Log.v("TEST","TESTTTT1");
             while (data.moveToNext()) {
-                float furthestLatitude = data.getFloat(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_FD_LATITUDE));
-                float furthestLongitude = data.getFloat(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_FD_LONGITUDE));
-                Log.v("TEST","TESTTTT2");
+                double furthestLatitude  = data.getDouble(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_FD_LATITUDE));
+                double furthestLongitude = data.getDouble(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_FD_LONGITUDE));
+                String teamName          = data.getString(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_NAME));
+                myItemizedOverlay.addItem(new GeoPoint(furthestLatitude, furthestLongitude), teamName, null);
             }
         }
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        return;
     }
 
     public void setMap(){
