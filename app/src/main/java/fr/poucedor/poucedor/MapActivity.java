@@ -60,7 +60,7 @@ public class MapActivity extends BaseActivity implements LoaderManager.LoaderCal
         mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.setMultiTouchControls(true);
 
-        Drawable marker = getResources().getDrawable(android.R.drawable.star_big_off);
+        Drawable marker = getResources().getDrawable(R.drawable.ic_drawer_place);
         int markerWidth = marker.getIntrinsicWidth();
         int markerHeight = marker.getIntrinsicHeight();
         marker.setBounds(0, markerHeight, markerWidth, 0);

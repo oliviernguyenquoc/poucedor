@@ -60,6 +60,8 @@
     <string name="minutes">minutes</string>
     <string name="hour">hour</string>
     <string name="hours">hours</string>
+    <string name="description_sync">Sync</string>
+
 
     <!-- Navigation bar text for the map -->
     <string name="title_map">Map</string>
