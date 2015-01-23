@@ -63,11 +63,12 @@ public final class DatabaseContract {
                     Team.COLUMN_NAME_STUDENT1_EMAIL + TEXT_TYPE + COMMA_SEP +
                     Team.COLUMN_NAME_STUDENT2_NAME  + TEXT_TYPE + COMMA_SEP +
                     Team.COLUMN_NAME_STUDENT2_EMAIL + TEXT_TYPE + COMMA_SEP +
-                    Team.COLUMN_NAME_FD             + " double"  + COMMA_SEP +
-                    Team.COLUMN_NAME_FD_LATITUDE    + " double"  + COMMA_SEP +
-                    Team.COLUMN_NAME_FD_LONGITUDE   + " double"  + COMMA_SEP +
-                    Team.COLUMN_NAME_LAST_LATITUDE  + " double"  + COMMA_SEP +
-                    Team.COLUMN_NAME_LAST_LONGITUDE + " double"  + COMMA_SEP +
+                    Team.COLUMN_NAME_FD             + " double" + COMMA_SEP +
+                    Team.COLUMN_NAME_FD_LATITUDE    + " double" + COMMA_SEP +
+                    Team.COLUMN_NAME_FD_LONGITUDE   + " double" + COMMA_SEP +
+                    Team.COLUMN_NAME_LAST_LATITUDE  + " double" + COMMA_SEP +
+                    Team.COLUMN_NAME_LAST_LONGITUDE + " double" + COMMA_SEP +
+                    Team.COLUMN_NAME_UNIVERSITY_ID  + TEXT_TYPE + COMMA_SEP +
                     "FOREIGN KEY(" + Team.COLUMN_NAME_UNIVERSITY_ID + ") REFERENCES " +
                     University.TABLE_NAME + "(" + University._ID + "));";
 
