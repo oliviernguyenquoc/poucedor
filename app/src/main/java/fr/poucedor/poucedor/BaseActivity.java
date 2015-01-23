@@ -32,6 +32,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.net.Uri;
 
+import fr.poucedor.poucedor.provider.PoucedorService;
+import fr.poucedor.poucedor.provider.RestFactory;
+import fr.poucedor.poucedor.provider.RestFactoryProvider;
+
 /**
  * BaseActivity is an abstract class which are herited by all classes wich contains Action bar.
  * This activity add to child Activities ActionBar, NavigationDrawer ...
@@ -118,6 +122,11 @@ public abstract class BaseActivity extends ActionBarActivity {
      */
     private View[] mNavDrawerItemViews = null;
 
+    /**
+     * RestFactory
+     */
+    private RestFactoryProvider restFactoryProvider;
+
     // Android Life Cycle Methods
 
     public static void setAccessibilityIgnore(View view) {
@@ -132,7 +141,9 @@ public abstract class BaseActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        String token = getSharedPreferences(PREFS_NAME,0).getString("token", null);
+        this.restFactoryProvider = new RestFactoryProvider(token, getContentResolver());
+        restFactoryProvider.getServerData();
         mHandler = new Handler();
     }
 

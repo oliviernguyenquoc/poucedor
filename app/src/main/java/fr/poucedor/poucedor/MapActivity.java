@@ -60,7 +60,7 @@ public class MapActivity extends BaseActivity implements LoaderManager.LoaderCal
         mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.setMultiTouchControls(true);
 
-        Drawable marker = getResources().getDrawable(android.R.drawable.star_big_on);
+        Drawable marker = getResources().getDrawable(android.R.drawable.star_big_off);
         int markerWidth = marker.getIntrinsicWidth();
         int markerHeight = marker.getIntrinsicHeight();
         marker.setBounds(0, markerHeight, markerWidth, 0);
@@ -70,10 +70,10 @@ public class MapActivity extends BaseActivity implements LoaderManager.LoaderCal
         myItemizedOverlay = new MyItemizedOverlay(marker, resourceProxy);
         mapView.getOverlays().add(myItemizedOverlay);
 
-        GeoPoint myPoint1 = new GeoPoint(0 * 1000000, 0 * 1000000);
-        myItemizedOverlay.addItem(myPoint1, "myPoint1", "myPoint1");
-        GeoPoint myPoint2 = new GeoPoint((int) 48.8534100 * 1000000, (int) 2.3488000 * 1000000);
-        myItemizedOverlay.addItem(myPoint2, "myPoint2", "myPoint2");
+//        GeoPoint myPoint1 = new GeoPoint(0 * 1000000, 0 * 1000000);
+//        myItemizedOverlay.addItem(myPoint1, "myPoint1", "myPoint1");
+//        GeoPoint myPoint2 = new GeoPoint((int) 48.8534100 * 1000000, (int) 2.3488000 * 1000000);
+//        myItemizedOverlay.addItem(myPoint2, "myPoint2", "myPoint2");
 
         setFloatingActionButton();
 
@@ -82,8 +82,8 @@ public class MapActivity extends BaseActivity implements LoaderManager.LoaderCal
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-//        switch (id) {
-//            case URL_LOADER:
+        switch (id) {
+            case URL_LOADER:
                 return new CursorLoader(
                         this,
                         PoucedorProvider.CONTENT_URI,
@@ -101,26 +101,26 @@ public class MapActivity extends BaseActivity implements LoaderManager.LoaderCal
                         null,
                         null
                 );
-//            default:
-//                return null;
-//        }
+            default:
+                return null;
+        }
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null) {
-            Log.v("TEST","TESTTTT1");
             while (data.moveToNext()) {
-                float furthestLatitude = data.getFloat(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_FD_LATITUDE));
-                float furthestLongitude = data.getFloat(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_FD_LONGITUDE));
-                Log.v("TEST","TESTTTT2");
+                double furthestLatitude  = data.getDouble(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_FD_LATITUDE));
+                double furthestLongitude = data.getDouble(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_FD_LONGITUDE));
+                String teamName          = data.getString(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_NAME));
+                myItemizedOverlay.addItem(new GeoPoint(furthestLatitude, furthestLongitude), teamName, null);
             }
         }
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        return;
     }
 
     public void setFloatingActionButton(){
