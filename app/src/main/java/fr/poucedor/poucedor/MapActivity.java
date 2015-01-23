@@ -16,11 +16,13 @@ import org.osmdroid.views.MapController;
 
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -60,7 +62,7 @@ public class MapActivity extends BaseActivity implements LoaderManager.LoaderCal
         mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.setMultiTouchControls(true);
 
-        Drawable marker = getResources().getDrawable(android.R.drawable.star_big_on);
+        Drawable marker = getResources().getDrawable(R.drawable.ic_drawer_place);
         int markerWidth = marker.getIntrinsicWidth();
         int markerHeight = marker.getIntrinsicHeight();
         marker.setBounds(0, markerHeight, markerWidth, 0);
