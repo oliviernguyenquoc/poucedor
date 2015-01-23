@@ -21,7 +21,7 @@ public class PoucedorProvider extends ContentProvider {
 
     private static final String AUTHORITY = "fr.poucedor.poucedor.provider";
     private static final String BASE_PATH = "positions";
-    public static Uri CONTENT_URI = Uri.parse("content://" + DatabaseContract.CONTENT_AUTHORITY + "/" + BASE_PATH);
+    public static final Uri CONTENT_URI = Uri.parse("content://" + DatabaseContract.CONTENT_AUTHORITY + "/" + BASE_PATH);
 
     public static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);

@@ -63,6 +63,9 @@ Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
             android:name=".AboutActivity"
             android:label="@string/title_activity_about" >
         </activity>
+        <provider
+            android:authorities="fr.poucedor.poucedor.provider"
+            android:name="fr.poucedor.poucedor.provider.PoucedorProvider"/>
     </application>
 
 </manifest>

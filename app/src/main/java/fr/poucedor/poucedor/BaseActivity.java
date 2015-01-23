@@ -424,6 +424,9 @@ public abstract class BaseActivity extends ActionBarActivity {
                 startActivity(surf);
                 break;
             case NAVDRAWER_ITEM_LOG_OUT:
+                SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear().commit();
                 intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();

@@ -14,8 +14,13 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.views.MapController;
 
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -23,10 +28,15 @@ import android.widget.Toast;
 import com.melnykov.fab.FloatingActionButton;
 
 import fr.poucedor.poucedor.UI.MyItemizedOverlay;
+import fr.poucedor.poucedor.provider.DatabaseContract;
+import fr.poucedor.poucedor.provider.PoucedorProvider;
 
-public class MapActivity extends BaseActivity {
+public class MapActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     MyItemizedOverlay myItemizedOverlay = null;
+
+    /** Identifies a particular Loader being used in this component */
+    private static final int URL_LOADER = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +76,50 @@ public class MapActivity extends BaseActivity {
         myItemizedOverlay.addItem(myPoint2, "myPoint2", "myPoint2");
 
         setFloatingActionButton();
+
+        getLoaderManager().initLoader(URL_LOADER, null, this);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+//        switch (id) {
+//            case URL_LOADER:
+                return new CursorLoader(
+                        this,
+                        PoucedorProvider.CONTENT_URI,
+                        new String[] {
+                                DatabaseContract.Team.COLUMN_NAME_FD,
+                                DatabaseContract.Team.COLUMN_NAME_FD_LATITUDE,
+                                DatabaseContract.Team.COLUMN_NAME_FD_LONGITUDE,
+                                DatabaseContract.Team.COLUMN_NAME_LAST_LATITUDE,
+                                DatabaseContract.Team.COLUMN_NAME_LAST_LONGITUDE,
+                                DatabaseContract.Team.COLUMN_NAME_NAME,
+                                DatabaseContract.Team.COLUMN_NAME_STUDENT1_NAME,
+                                DatabaseContract.Team.COLUMN_NAME_STUDENT2_NAME
+                        },
+                        null,
+                        null,
+                        null
+                );
+//            default:
+//                return null;
+//        }
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        if (data != null) {
+            Log.v("TEST","TESTTTT1");
+            while (data.moveToNext()) {
+                float furthestLatitude = data.getFloat(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_FD_LATITUDE));
+                float furthestLongitude = data.getFloat(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_FD_LONGITUDE));
+                Log.v("TEST","TESTTTT2");
+            }
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
 
     }
 

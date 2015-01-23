@@ -47,8 +47,6 @@ public class TestClass {
                     values.put(DatabaseContract.University.TABLE_NAME + "." + DatabaseContract.University.COLUMN_NAME_NAME, team.university.name);
                     values.put(DatabaseContract.University.TABLE_NAME + "." + DatabaseContract.University.COLUMN_NAME_LATITUDE, team.university.location.lat);
                     values.put(DatabaseContract.University.TABLE_NAME + "." + DatabaseContract.University.COLUMN_NAME_LONGITUDE, team.university.location.lon);
-
-                    // todo fixme!
                     poucedorProvider.insert(PoucedorProvider.CONTENT_URI, values);
 
                 }
@@ -60,6 +58,6 @@ public class TestClass {
             }
         };
 
-        pouceRest.teams("HELP", callback);
+        pouceRest.teams("", callback);
     }
 }

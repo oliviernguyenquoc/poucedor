@@ -73,6 +73,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getSharedPreferences(BaseActivity.PREFS_NAME, 0).getString("token", null) != null) {
+            Intent intent = new Intent(this, MapActivity.class);
+            startActivity(intent);
+        }
         setContentView(R.layout.activity_login);
 
         // Set up the login form.
@@ -330,9 +334,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         @Override
         protected void onPostExecute(final Boolean success) {
-            Log.v("OPE","#########################################################");
-
-
             if (success) {
                 Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                 startActivity(intent);
@@ -340,8 +341,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             } else {
                 mAuthTask = null;
                 showProgress(false);
+                mEmailView.setError(getString(R.string.error_invalid_email));
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                mEmailView.requestFocus();
             }
         }
 
