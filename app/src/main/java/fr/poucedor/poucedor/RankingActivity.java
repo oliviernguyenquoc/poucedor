@@ -7,69 +7,87 @@
 package fr.poucedor.poucedor;
 
 
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
+import fr.poucedor.poucedor.provider.DatabaseContract;
+import fr.poucedor.poucedor.provider.PoucedorProvider;
 
-public class RankingActivity extends BaseActivity {
+
+public class RankingActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     //UI Reference
 
+    private static final int URL_LOADER = 0;
+
+    SimpleCursorAdapter mAdapter;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
+        listView = (ListView)findViewById(R.id.ranking_list);
 
         toolbarSetUpCase();
-
-        addAndCompleteRankingTable();
-
+        getLoaderManager().initLoader(URL_LOADER, null, this);
     }
 
-    public void addAndCompleteRankingTable(){
-        try {
-            TableLayout tv = (TableLayout) findViewById(R.id.table);
-            tv.removeAllViewsInLayout();
-            int flag = 1;
-
-            // when i=-1, loop will display heading of each column
-            // then usually data will be display from i=0 to jArray.length()
-
-            /*
-            for (int i = -1; i < jArray.length(); i++) {
-
-                TableRow tr = new TableRow(Yourclassname.this);
-
-                tr.setLayoutParams(new LayoutParams(
-                        LayoutParams.FILL_PARENT,
-                        LayoutParams.WRAP_CONTENT));
-
-                // this will be executed once
-                if (flag == 1) {
-
-                    TextView b3 = new TextView(Yourclassname.this);
-                    b3.setText("column heading 1");
-                    b3.setTextColor(Color.BLUE);
-                    b3.setTextSize(15);
-                    tr.addView(b3);
-
-                    TextView b4 = new TextView(Yourclassname.this);
-                    b4.setPadding(10, 0, 0, 0);
-                    b4.setTextSize(15);
-                    b4.setText("column heading 2");
-                    b4.setTextColor(Color.BLUE);
-                    tr.addView(b4);
-                }
-            }
-        */
-        }
-        catch(Exception e){
-            Toast.makeText(RankingActivity.this, "No data to print", Toast.LENGTH_SHORT).show();
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        switch (id) {
+            case URL_LOADER:
+                return new CursorLoader(
+                        this,
+                        PoucedorProvider.CONTENT_URI,
+                        new String[] {
+                                DatabaseContract.Team._ID,
+                                DatabaseContract.Team.COLUMN_NAME_FD,
+                                DatabaseContract.Team.COLUMN_NAME_FD_LATITUDE,
+                                DatabaseContract.Team.COLUMN_NAME_FD_LONGITUDE,
+                                DatabaseContract.Team.COLUMN_NAME_LAST_LATITUDE,
+                                DatabaseContract.Team.COLUMN_NAME_LAST_LONGITUDE,
+                                DatabaseContract.Team.COLUMN_NAME_NAME,
+                                DatabaseContract.Team.COLUMN_NAME_STUDENT1_NAME,
+                                DatabaseContract.Team.COLUMN_NAME_STUDENT2_NAME
+                        },
+                        null,
+                        null,
+                        null
+                );
+            default:
+                return null;
         }
     }
 
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        String[] fromColumns = new String[] {
+                DatabaseContract.Team.COLUMN_NAME_NAME,
+                DatabaseContract.Team.COLUMN_NAME_FD
+        };
+        int[] toViews = new int[] {
+                R.id.ranking_team_name,
+                R.id.ranking_distance
+        };
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+                R.layout.ranking_item, data, fromColumns, toViews, 0);
+        listView.setAdapter(adapter);
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
 
     @Override
     protected int getLayoutResource() {

@@ -15,11 +15,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/toolbar"/>
 
-        <TableLayout android:id="@+id/table"
+        <ListView
+            android:id="@+id/ranking_list"
+            android:layout_below="@+id/toolbar"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-        </TableLayout>
+            </ListView>
 
     </RelativeLayout>
 
