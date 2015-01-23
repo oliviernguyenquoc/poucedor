@@ -41,6 +41,7 @@ import fr.poucedor.poucedor.provider.LoginRequest;
 import fr.poucedor.poucedor.provider.LoginResponse;
 import fr.poucedor.poucedor.provider.MyRetrofitErrorHandler;
 import fr.poucedor.poucedor.provider.PoucedorService;
+import fr.poucedor.poucedor.provider.RestFactory;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 
@@ -77,6 +78,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
         }
+        this.pouceRest = new RestFactory().getPouceRest();
         setContentView(R.layout.activity_login);
 
         // Set up the login form.
@@ -194,6 +196,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         return password.length() > 4;
     }
 
+    private PoucedorService pouceRest;
+
     /**
      * Shows the progress UI and hides the login form.
      */
@@ -303,18 +307,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            RestAdapter restAdapter = new RestAdapter.Builder()
-                    .setEndpoint("http://www.poucedor.fr/") // The base API endpoint.
-                    .build();
-
-            PoucedorService pouceRest = restAdapter.create(PoucedorService.class);
             LoginResponse response;
             try {
-                Log.v("BEFORE","######################################################################");
                 response = pouceRest.login(new LoginRequest(mEmail, mPassword));
-                Log.v("AFTER", "######################################################################");
             } catch(RetrofitError err) {
-                Log.v("ERROR", "######################################################################");
                 return false;
             }
             SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
