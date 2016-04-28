@@ -20,11 +20,13 @@
         <item name="android:elevation">@dimen/headerbar_elevation</item>
     </style>
 
-<!--    <style name="AppTheme" parent="BaseTheme">
+    <style name="AppTheme" parent="BaseTheme">
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:colorControlHighlight">@color/accent_translucent</item> 
         <item name="android:windowSharedElementsUseOverlay">false</item>
-    </style>-->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
 
     <style name="FabStyle">
         <item name="android:layout_width">wrap_content</item>

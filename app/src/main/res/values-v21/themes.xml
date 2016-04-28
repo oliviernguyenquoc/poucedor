@@ -7,9 +7,6 @@ Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
 -->
 
 <resources>
-
-    <style name="AppTheme" parent="BaseTheme"/>
-
     <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item> 
         <item name="colorPrimaryDark">@color/primary_dark</item> 
