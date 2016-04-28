@@ -19,21 +19,36 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.support.design.widget.NavigationView;
 
-import com.melnykov.fab.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 
 import fr.poucedor.poucedor.UI.MyItemizedOverlay;
 import fr.poucedor.poucedor.provider.DatabaseContract;
 import fr.poucedor.poucedor.provider.PoucedorProvider;
+import fr.poucedor.poucedor.picasso.CircleTransform;
 
-public class MapActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class MapActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    private DrawerLayout drawerLayout;
+    private View content;
+    private NavigationView navigationView;
 
     MyItemizedOverlay myItemizedOverlay = null;
 
@@ -48,10 +63,60 @@ public class MapActivity extends BaseActivity implements LoaderManager.LoaderCal
 
         setMap();
 
-        setFloatingActionButton();
+        initFab();
+        initToolbar();
+        setupDrawerLayout();
+
+        final ImageView avatar = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.avatar);
+        Picasso.with(this).load(AVATAR_URL).transform(new CircleTransform()).into(avatar);
 
         getLoaderManager().initLoader(URL_LOADER, null, this);
     }
+
+    private void initFab() {
+        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                Snackbar.make(content, "FAB Clicked", Snackbar.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void initToolbar() {
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        final ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    private void setupDrawerLayout() {
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override public boolean onNavigationItemSelected(MenuItem menuItem) {
+                Snackbar.make(content, menuItem.getTitle() + " pressed", Snackbar.LENGTH_LONG).show();
+                menuItem.setChecked(true);
+                drawerLayout.closeDrawers();
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -129,21 +194,6 @@ public class MapActivity extends BaseActivity implements LoaderManager.LoaderCal
         myItemizedOverlay.addItem(myPoint2, "myPoint2", "myPoint2");
     }
 
-    public void setFloatingActionButton(){
-        ListView listView = (ListView) findViewById(android.R.id.list);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-        fab.attachToListView(listView);
-        if (android.os.Build.VERSION.SDK_INT >= 21) {
-            fab.setColorRipple(getResources().getColor(R.color.ripple));
-        }
-        findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                findMyLocation();
-            }
-        });
-    }
-
     public void findMyLocation() {
         System.out.println("-----------------------ETAPE 1----------------------");
         GPSTracker gps = new GPSTracker(this);
@@ -158,20 +208,9 @@ public class MapActivity extends BaseActivity implements LoaderManager.LoaderCal
         } else {
             Toast.makeText(MapActivity.this, R.string.gps_not_enable, Toast.LENGTH_SHORT).show();
         }
-        setFloatingActionButton();
+        //setFloatingActionButton();
 
         getLoaderManager().initLoader(URL_LOADER, null, this);
-    }
-
-
-    @Override
-    protected int getSelfNavDrawerItem() {
-        return NAVDRAWER_ITEM_MAP;
-    }
-
-    @Override
-    protected int getLayoutResource() {
-        return R.layout.activity_map;
     }
 
 }
