@@ -11,9 +11,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar"
-            android:id="@+id/toolbar"/>
-
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,6 +77,6 @@
     </LinearLayout>
 
     <!-- Nav drawer -->
-    <include layout="@layout/navdrawer" />
+    <include layout="@layout/activity_base" />
 
 </android.support.v4.widget.DrawerLayout>

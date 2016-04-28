@@ -34,8 +34,24 @@ Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
     <dimen name="text_size_diff_large_small">6sp</dimen>
     <dimen name="speaker_image_size">40dp</dimen>
 
-    <dimen name="keyline_1">16dp</dimen>
-
     <dimen name="headerbar_elevation">4dp</dimen>
+
+    <!-- Nav drawer -->
+    <dimen name="nav_chosen_account_height">200dp</dimen>
+    <dimen name="nav_width">260dp</dimen>
+    <dimen name="nav_profile_image_size">40dp</dimen>
+    <dimen name="nav_header_height">200dp</dimen>
+
+    <!-- Profile in Nav drawer -->
+    <dimen name="keyline_1">40dp</dimen>
+    <dimen name="keyline_2">16dp</dimen>
+
+    <!-- Floating Action Button -->
+    <dimen name="fab_elevation">8dp</dimen>
+    <dimen name="fab_press_translation_z">9dp</dimen>
+    <dimen name="fab_size">56dp</dimen>
+    <dimen name="fab_size_small">40dp</dimen>
+    <dimen name="fab_icon_size">24dp</dimen>
+
 
 </resources>

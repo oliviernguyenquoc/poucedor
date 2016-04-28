@@ -40,4 +40,5 @@
     <color name="primary_pressed">#cc3f51b5</color>
     <color name="ripple">#8affffff</color>
 
+    <color name="colorAccent">#FF4081</color>
 </resources>

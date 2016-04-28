@@ -16,13 +16,13 @@ public class WhatIsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_what_is);
 
-        toolbarSetUpCase();
+        //toolbarSetUpCase();
 
     }
 
-    @Override
+/*    @Override
     protected int getLayoutResource() {
         return R.layout.activity_what_is;
-    }
+    }*/
 
 }

@@ -38,7 +38,7 @@ public class SettingsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        toolbarSetUpCase();
+        //toolbarSetUpCase();
 
         // Restore preferences
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
@@ -178,9 +178,11 @@ public class SettingsActivity extends BaseActivity {
     }
 
 
+/*
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_settings;
     }
+*/
 
 }

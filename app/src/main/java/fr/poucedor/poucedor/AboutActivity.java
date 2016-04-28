@@ -19,13 +19,13 @@ public class AboutActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        toolbarSetUpCase();
+        //toolbarSetUpCase();
 
     }
 
-    @Override
+/*    @Override
     protected int getLayoutResource() {
         return R.layout.activity_about;
-    }
+    }*/
 
 }

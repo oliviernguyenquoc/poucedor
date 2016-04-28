@@ -37,7 +37,7 @@ public class RankingActivity extends BaseActivity implements LoaderManager.Loade
         setContentView(R.layout.activity_ranking);
         listView = (ListView)findViewById(R.id.ranking_list);
 
-        toolbarSetUpCase();
+        //toolbarSetUpCase();
         getLoaderManager().initLoader(URL_LOADER, null, this);
     }
 
@@ -89,10 +89,10 @@ public class RankingActivity extends BaseActivity implements LoaderManager.Loade
 
     }
 
-    @Override
+/*    @Override
     protected int getLayoutResource() {
         return R.layout.activity_ranking;
-    }
+    }*/
 
 
 }

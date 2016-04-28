@@ -23,9 +23,9 @@
         <attr name="shadowVisible" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="ScrimInsetsView">
+<!--    <declare-styleable name="ScrimInsetsView">
         <attr name="insetForeground" format="reference|color" />
-    </declare-styleable>
+    </declare-styleable>-->
 
     <declare-styleable name="BezelImageView">
         <attr name="maskDrawable" format="reference" />
