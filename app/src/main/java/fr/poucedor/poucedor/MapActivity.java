@@ -14,11 +14,13 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.views.MapController;
 
+import android.content.Intent;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.graphics.drawable.Drawable;
@@ -37,6 +39,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.support.design.widget.NavigationView;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.squareup.picasso.Picasso;
 
 import fr.poucedor.poucedor.UI.MyItemizedOverlay;
@@ -49,11 +54,19 @@ public class MapActivity extends AppCompatActivity implements LoaderManager.Load
     private DrawerLayout drawerLayout;
     private View content;
     private NavigationView navigationView;
+    public static final String PREFS_NAME = "MyPrefsFile";
 
     MyItemizedOverlay myItemizedOverlay = null;
 
-    /** Identifies a particular Loader being used in this component */
+    /**
+     * Identifies a particular Loader being used in this component
+     */
     private static final int URL_LOADER = 0;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,15 +80,21 @@ public class MapActivity extends AppCompatActivity implements LoaderManager.Load
         initToolbar();
         setupDrawerLayout();
 
-        final ImageView avatar = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.avatar);
-        Picasso.with(this).load(AVATAR_URL).transform(new CircleTransform()).into(avatar);
+        content = findViewById(R.id.content);
+
+        final ImageView profile_image = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.profile_image);
+        //Picasso.with(this).load(AVATAR_URL).transform(new CircleTransform()).into(avatar);
 
         getLoaderManager().initLoader(URL_LOADER, null, this);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void initFab() {
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 Snackbar.make(content, "FAB Clicked", Snackbar.LENGTH_SHORT).show();
             }
         });
@@ -97,11 +116,24 @@ public class MapActivity extends AppCompatActivity implements LoaderManager.Load
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override public boolean onNavigationItemSelected(MenuItem menuItem) {
-                Snackbar.make(content, menuItem.getTitle() + " pressed", Snackbar.LENGTH_LONG).show();
-                menuItem.setChecked(true);
-                drawerLayout.closeDrawers();
-                return true;
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                Intent intent;
+                switch (menuItem.getItemId()) {
+                    case R.id.navdrawer_item_ranking:
+                        intent = new Intent(MapActivity.this, RankingActivity.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.navdrawer_item_settings:
+                        intent = new Intent(MapActivity.this, SettingsActivity.class);
+                        startActivity(intent);
+                        return true;
+                    default:
+                        Snackbar.make(content, menuItem.getTitle() + " pressed", Snackbar.LENGTH_LONG).show();
+                        menuItem.setChecked(true);
+                        drawerLayout.closeDrawers();
+                        return true;
+                }
             }
         });
     }
@@ -125,7 +157,7 @@ public class MapActivity extends AppCompatActivity implements LoaderManager.Load
                 return new CursorLoader(
                         this,
                         PoucedorProvider.CONTENT_URI,
-                        new String[] {
+                        new String[]{
                                 DatabaseContract.Team.COLUMN_NAME_FD,
                                 DatabaseContract.Team.COLUMN_NAME_FD_LATITUDE,
                                 DatabaseContract.Team.COLUMN_NAME_FD_LONGITUDE,
@@ -148,9 +180,9 @@ public class MapActivity extends AppCompatActivity implements LoaderManager.Load
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null) {
             while (data.moveToNext()) {
-                double furthestLatitude  = data.getDouble(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_FD_LATITUDE));
+                double furthestLatitude = data.getDouble(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_FD_LATITUDE));
                 double furthestLongitude = data.getDouble(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_FD_LONGITUDE));
-                String teamName          = data.getString(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_NAME));
+                String teamName = data.getString(data.getColumnIndex(DatabaseContract.Team.COLUMN_NAME_NAME));
                 myItemizedOverlay.addItem(new GeoPoint(furthestLatitude, furthestLongitude), teamName, null);
             }
         }
@@ -161,7 +193,7 @@ public class MapActivity extends AppCompatActivity implements LoaderManager.Load
         return;
     }
 
-    public void setMap(){
+    public void setMap() {
         MapView mapView = (MapView) findViewById(R.id.mapview);
 
         MapController mapController = new MapController(mapView);
@@ -213,4 +245,43 @@ public class MapActivity extends AppCompatActivity implements LoaderManager.Load
         getLoaderManager().initLoader(URL_LOADER, null, this);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Map Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://fr.poucedor.poucedor/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Map Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://fr.poucedor.poucedor/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 }

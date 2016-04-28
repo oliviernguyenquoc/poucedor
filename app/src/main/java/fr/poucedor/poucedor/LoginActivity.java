@@ -74,7 +74,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getSharedPreferences(BaseActivity.PREFS_NAME, 0).getString("token", null) != null) {
+        if (getSharedPreferences(MapActivity.PREFS_NAME, 0).getString("token", null) != null) {
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
         }
@@ -313,7 +313,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             } catch(RetrofitError err) {
                 return false;
             }
-            SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
+            SharedPreferences settings = getSharedPreferences(MapActivity.PREFS_NAME, 0);
             SharedPreferences.Editor editor = settings.edit();
             editor.putString("token", response.token);
             editor.putString("id", response._id);

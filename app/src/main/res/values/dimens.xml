@@ -38,4 +38,6 @@ Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
 
     <dimen name="headerbar_elevation">4dp</dimen>
 
+    <dimen name="status_bar_height">25dp</dimen>
+
 </resources>

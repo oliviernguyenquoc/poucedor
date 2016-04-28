@@ -2,16 +2,13 @@ package fr.poucedor.poucedor;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
 
-public class AboutActivity extends BaseActivity {
-
-
-    //UI Reference
-    private ImageView logo;
+public class AboutActivity extends AppCompatActivity {
 
 
     @Override
@@ -19,13 +16,6 @@ public class AboutActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        toolbarSetUpCase();
-
-    }
-
-    @Override
-    protected int getLayoutResource() {
-        return R.layout.activity_about;
     }
 
 }

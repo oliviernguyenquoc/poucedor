@@ -1,10 +1,11 @@
 package fr.poucedor.poucedor;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 
-public class WhatIsActivity extends BaseActivity {
+public class WhatIsActivity extends AppCompatActivity {
 
 
     //UI Reference
@@ -16,13 +17,7 @@ public class WhatIsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_what_is);
 
-        toolbarSetUpCase();
 
-    }
-
-    @Override
-    protected int getLayoutResource() {
-        return R.layout.activity_what_is;
     }
 
 }

@@ -12,6 +12,7 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -22,7 +23,7 @@ import fr.poucedor.poucedor.provider.DatabaseContract;
 import fr.poucedor.poucedor.provider.PoucedorProvider;
 
 
-public class RankingActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class RankingActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     //UI Reference
 
@@ -37,7 +38,6 @@ public class RankingActivity extends BaseActivity implements LoaderManager.Loade
         setContentView(R.layout.activity_ranking);
         listView = (ListView)findViewById(R.id.ranking_list);
 
-        toolbarSetUpCase();
         getLoaderManager().initLoader(URL_LOADER, null, this);
     }
 
@@ -88,12 +88,6 @@ public class RankingActivity extends BaseActivity implements LoaderManager.Loade
     public void onLoaderReset(Loader<Cursor> loader) {
 
     }
-
-    @Override
-    protected int getLayoutResource() {
-        return R.layout.activity_ranking;
-    }
-
 
 }
 

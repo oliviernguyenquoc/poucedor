@@ -8,6 +8,7 @@ package fr.poucedor.poucedor;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SettingsActivity extends BaseActivity {
+public class SettingsActivity extends AppCompatActivity {
 
 
     //UI Reference
@@ -37,8 +38,6 @@ public class SettingsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
-        toolbarSetUpCase();
 
         // Restore preferences
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
@@ -175,12 +174,6 @@ public class SettingsActivity extends BaseActivity {
                 }
             });
 
-    }
-
-
-    @Override
-    protected int getLayoutResource() {
-        return R.layout.activity_settings;
     }
 
 }

@@ -38,6 +38,14 @@
     <!-- Floating Action Button-->
     <color name="primary">#FFFFFF</color>
     <color name="primary_pressed">#cc3f51b5</color>
+    <color name="fab_colorNormal">#cc3f51b5</color>
+    <color name="fab_colorPressed">#cc3f51b5</color>
     <color name="ripple">#8affffff</color>
+
+    <color name="primary_dark">#1976D2</color>
+    <color name="accent">#FFEB3B</color>
+    <color name="accent_translucent">#80FFEB3B</color>
+    <color name="accent_bright">#FFF493</color>
+
 
 </resources>
