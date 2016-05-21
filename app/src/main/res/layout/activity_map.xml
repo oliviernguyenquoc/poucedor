@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="?attr/selectableItemBackground"
+    tools:openDrawer="start"
     tools:context=".MapActivity">
 
     <!-- activity view -->
