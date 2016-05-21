@@ -1,18 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!--
-Adapted from Google I/O 2014 App - Apache License, Version 2.0
-
-Created by MOLLET-PADIER Loïc and NGUYEN QUOC Olivier
--->
-
-<resources>
-    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/primary</item> 
-        <item name="colorPrimaryDark">@color/primary_dark</item> 
-        <item name="colorControlHighlight">@color/accent_translucent</item> 
-        <item name="colorAccent">@color/accent</item>
-        <item name="selectableItemBackground">@drawable/selectable_item_background</item>
-        <item name="android:selectableItemBackground">@drawable/selectable_item_background</item>
-    </style>
-</resources>

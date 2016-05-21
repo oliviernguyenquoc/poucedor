@@ -6,27 +6,17 @@
 
 <resources>
     //TODO Replace Image background by color
+    <!-- MainColor -->
     <color name="colorPrimary">#1E88E5</color>
     <color name="colorPrimaryDark">#1976D2</color>
 
     <color name="colorSecondary">#FF8F00</color>
     <color name="colorSecondaryDark">#FF6F00</color>
 
-    <color name="windowBackgroundColor">#FFFFFF</color>
+    <color name="accent_translucent">@color/colorPrimaryDark</color>
 
-    <color name="navdrawer_background">#FFFFFF</color>
 
-    <color name="navdrawer_text_color">@color/body_text_1</color>
-    <color name="navdrawer_text_color_selected">@color/colorPrimary</color>
-    <color name="navdrawer_icon_tint">#888</color>
-    <color name="navdrawer_icon_tint_selected">@color/colorPrimary</color>
-
-    <color name="session_photo_scrim">#6000</color>
-
-    <color name="transparent">#00000000</color>
-
-    <color name="translucent_statusbar_background">#cc3f51b5</color>
-
+    <!-- Text -->
     <color name="body_text_1">#de000000</color>
     <color name="body_text_2">#8a000000</color>
     <color name="body_text_3">#60000000</color>
@@ -35,17 +25,30 @@
     <color name="body_text_1_inverse">#deffffff</color>
     <color name="body_text_2_inverse">#8affffff</color>
 
-    <!-- Floating Action Button-->
+
+    <!-- NavDrawer -->
+    <color name="navdrawer_background">#FFFFFF</color>
+
+    <color name="navdrawer_text_color">@color/body_text_1</color>
+    <color name="navdrawer_text_color_selected">@color/colorPrimary</color>
+    <color name="navdrawer_icon_tint">#888</color>
+    <color name="navdrawer_icon_tint_selected">@color/colorPrimaryDark</color>
+
+
+    <!-- Floating Action Button -->
     <color name="primary">#FFFFFF</color>
     <color name="primary_pressed">#cc3f51b5</color>
     <color name="fab_colorNormal">#cc3f51b5</color>
     <color name="fab_colorPressed">#cc3f51b5</color>
     <color name="ripple">#8affffff</color>
 
-    <color name="primary_dark">#1976D2</color>
-    <color name="accent">#FFEB3B</color>
-    <color name="accent_translucent">#80FFEB3B</color>
-    <color name="accent_bright">#FFF493</color>
+
+    <!-- Other -->
+    <color name="session_photo_scrim">#6000</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="translucent_statusbar_background">#cc3f51b5</color>
 
 
 </resources>

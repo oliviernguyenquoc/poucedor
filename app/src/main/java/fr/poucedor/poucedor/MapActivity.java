@@ -24,6 +24,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -54,7 +55,6 @@ public class MapActivity extends AppCompatActivity implements LoaderManager.Load
     private DrawerLayout drawerLayout;
     private View content;
     private NavigationView navigationView;
-    public static final String PREFS_NAME = "MyPrefsFile";
 
     MyItemizedOverlay myItemizedOverlay = null;
 
@@ -92,10 +92,14 @@ public class MapActivity extends AppCompatActivity implements LoaderManager.Load
     }
 
     private void initFab() {
-        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
+
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(content, "FAB Clicked", Snackbar.LENGTH_SHORT).show();
+                findMyLocation();
+                Toast.makeText(MapActivity.this, "Search location", Toast.LENGTH_SHORT).show();
             }
         });
     }

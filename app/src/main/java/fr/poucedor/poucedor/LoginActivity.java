@@ -71,10 +71,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private Button mWhatIsButton;
     private ImageView logo;
 
+    public static final String PREFS_NAME = "MyPrefsFile";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getSharedPreferences(MapActivity.PREFS_NAME, 0).getString("token", null) != null) {
+        if (getSharedPreferences(PREFS_NAME, 0).getString("token", null) != null) {
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
         }
@@ -313,7 +315,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             } catch(RetrofitError err) {
                 return false;
             }
-            SharedPreferences settings = getSharedPreferences(MapActivity.PREFS_NAME, 0);
+            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor editor = settings.edit();
             editor.putString("token", response.token);
             editor.putString("id", response._id);
